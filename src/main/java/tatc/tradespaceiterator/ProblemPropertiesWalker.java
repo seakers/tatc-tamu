@@ -1,6 +1,5 @@
 package tatc.tradespaceiterator;
 
-import tatc.architecture.specifications.SpecialOrbit;
 import java.util.ArrayList;
 import java.util.Properties;
 

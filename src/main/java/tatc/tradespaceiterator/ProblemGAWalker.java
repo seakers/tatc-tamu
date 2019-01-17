@@ -30,7 +30,7 @@ public class ProblemGAWalker extends AbstractProblem {
         //TODO:
         // 1. From the gene, create a TATCWalker object
         // 2. create the Architecture JSON file using the method toJSON() from TATCWalker
-        // 3. Call ExecutiveDriver.evaluate(JSONfile)
+        // 3. Call TradespaceSearchExecutive.evaluate(JSONfile)
 
         
     }

@@ -5,7 +5,6 @@
  */
 package tatc.tradespaceiterator;
 
-import tatc.architecture.specifications.SpecialOrbit;
 import java.util.ArrayList;
 import org.orekit.utils.Constants;
 import seakers.conmop.util.Bounds;

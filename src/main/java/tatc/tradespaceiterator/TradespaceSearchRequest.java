@@ -5,8 +5,6 @@
  */
 package tatc.tradespaceiterator;
 
-import tatc.architecture.specifications.MissionConcept;
-
 public class TradespaceSearchRequest {
 
     private final MissionConcept MissionConcepts;
