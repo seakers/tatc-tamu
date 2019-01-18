@@ -13,6 +13,14 @@ public class GroundNetwork {
     //TODO: can also be an integer
     private final GroundStation groundStation;
 
+    public GroundNetwork(String name, String acronym, Agency agency, QuantitativeRange numberStations, GroundStation groundStation) {
+        this.name = name;
+        this.acronym = acronym;
+        this.agency = agency;
+        this.numberStations = numberStations;
+        this.groundStation = groundStation;
+    }
+
     public String getName() {
         return name;
     }

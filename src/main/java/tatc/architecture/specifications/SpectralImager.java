@@ -26,6 +26,25 @@ public class SpectralImager {
     private final double minSignalNoiseRatio;
     private final double detectiveQuantumEfficiency;
 
+    public SpectralImager(String name, String acronym, Agency agency, double mass, double volume, double power, List<Double> operatingWavelength, int pixelBitDepth, double fieldOfView, String fieldOfViewShape, int numberPixels, double dataRate, String solarConditions, double orientation, double minSignalNoiseRatio, double detectiveQuantumEfficiency) {
+        this.name = name;
+        this.acronym = acronym;
+        this.agency = agency;
+        this.mass = mass;
+        this.volume = volume;
+        this.power = power;
+        this.operatingWavelength = operatingWavelength;
+        this.pixelBitDepth = pixelBitDepth;
+        this.fieldOfView = fieldOfView;
+        this.fieldOfViewShape = fieldOfViewShape;
+        this.numberPixels = numberPixels;
+        this.dataRate = dataRate;
+        this.solarConditions = solarConditions;
+        this.orientation = orientation;
+        this.minSignalNoiseRatio = minSignalNoiseRatio;
+        this.detectiveQuantumEfficiency = detectiveQuantumEfficiency;
+    }
+
     public String getName() {
         return name;
     }

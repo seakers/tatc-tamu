@@ -25,7 +25,6 @@ public class SyntheticApertureRadar {
     private final double pulseWidth;
     private final double antennaSize;
     private final double antennaEfficiency;
-    private final double antennaEfficiency;
     private final double operatingFrequency;
     private final double peakTransmitPower;
     private final double chirpBandwidth;
@@ -38,6 +37,38 @@ public class SyntheticApertureRadar {
     private final double sceneTemperature;
     private final double systemNoiseFactor;
     private final double maxSigmaNoiseEquivalentReflective;
+
+    public SyntheticApertureRadar(String name, String acronym, Agency agency, double mass, double volume, double power, String solarConditions, double dataRate, double fieldOfView, int numberPixels, int pixelBitDepth, List<Double> operatingWavelength, double sideLookAngle, QuantitativeValue pulseFrequency, double pulseWidth, double antennaSize, double antennaEfficiency, double operatingFrequency, double peakTransmitPower, double chirpBandwidth, double systemLoss, double lr, double la, double awa, double awr, double atmosphericLoss, double sceneTemperature, double systemNoiseFactor, double maxSigmaNoiseEquivalentReflective) {
+        this.name = name;
+        this.acronym = acronym;
+        this.agency = agency;
+        this.mass = mass;
+        this.volume = volume;
+        this.power = power;
+        this.solarConditions = solarConditions;
+        this.dataRate = dataRate;
+        this.fieldOfView = fieldOfView;
+        this.numberPixels = numberPixels;
+        this.pixelBitDepth = pixelBitDepth;
+        this.operatingWavelength = operatingWavelength;
+        this.sideLookAngle = sideLookAngle;
+        this.pulseFrequency = pulseFrequency;
+        this.pulseWidth = pulseWidth;
+        this.antennaSize = antennaSize;
+        this.antennaEfficiency = antennaEfficiency;
+        this.operatingFrequency = operatingFrequency;
+        this.peakTransmitPower = peakTransmitPower;
+        this.chirpBandwidth = chirpBandwidth;
+        this.systemLoss = systemLoss;
+        Lr = lr;
+        La = la;
+        this.awa = awa;
+        this.awr = awr;
+        this.atmosphericLoss = atmosphericLoss;
+        this.sceneTemperature = sceneTemperature;
+        this.systemNoiseFactor = systemNoiseFactor;
+        this.maxSigmaNoiseEquivalentReflective = maxSigmaNoiseEquivalentReflective;
+    }
 
     public String getName() {
         return name;

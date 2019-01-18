@@ -21,6 +21,21 @@ public class Instrument {
     private final double dataRate;
     private final String solarConditions;
 
+    public Instrument(String name, String acronym, Agency agency, double mass, double volume, double power, List<Double> operatingWavelength, int pixelBitDepth, double fieldOfView, int numberPixels, double dataRate, String solarConditions) {
+        this.name = name;
+        this.acronym = acronym;
+        this.agency = agency;
+        this.mass = mass;
+        this.volume = volume;
+        this.power = power;
+        this.operatingWavelength = operatingWavelength;
+        this.pixelBitDepth = pixelBitDepth;
+        this.fieldOfView = fieldOfView;
+        this.numberPixels = numberPixels;
+        this.dataRate = dataRate;
+        this.solarConditions = solarConditions;
+    }
+
     public String getName() {
         return name;
     }

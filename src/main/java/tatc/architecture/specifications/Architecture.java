@@ -9,6 +9,11 @@ public class Architecture {
     private final Constellation constellation;
     private final GroundNetwork groundNetwork;
 
+    public Architecture(Constellation constellation, GroundNetwork groundNetwork) {
+        this.constellation = constellation;
+        this.groundNetwork = groundNetwork;
+    }
+
     public Constellation getConstellation() {
         return constellation;
     }

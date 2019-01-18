@@ -13,6 +13,15 @@ public class AnalysisSettings {
     private final String searchPreference;
     private final SearchParameters searchParameters;
 
+    public AnalysisSettings(int propagationFidelity, boolean includePropulsion, Outputs outputs, OutputBounds outputBounds, String searchPreference, SearchParameters searchParameters) {
+        this.propagationFidelity = propagationFidelity;
+        this.includePropulsion = includePropulsion;
+        this.outputs = outputs;
+        this.outputBounds = outputBounds;
+        this.searchPreference = searchPreference;
+        this.searchParameters = searchParameters;
+    }
+
     public int getPropagationFidelity() {
         return propagationFidelity;
     }

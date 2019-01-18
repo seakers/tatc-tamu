@@ -30,6 +30,32 @@ public class OutputBounds {
     private final QuantitativeValue outputObjAzimuth;
     private final QuantitativeValue outputObjRange;
 
+    public OutputBounds(QuantitativeValue outputTimeAfterStart, QuantitativeValue outputTimeToCoverage, QuantitativeValue outputAccessTime, QuantitativeValue outputDownlinkLatency, QuantitativeValue outputRevisitTime, QuantitativeValue outputRepeatTime, QuantitativeValue outputCrossOverlap, QuantitativeValue outputAlongOverlap, QuantitativeValue outputNumPasses, QuantitativeValue outputLunarPhase, QuantitativeValue outputObsZenith, QuantitativeValue outputObsAzimuth, QuantitativeValue outputSunZenith, QuantitativeValue outputSunAzimuth, QuantitativeValue outputSpatialResolution, QuantitativeValue outputCrossSwath, QuantitativeValue outputAlongSwath, QuantitativeValue outputObsLatitude, QuantitativeValue outputObsLongitude, QuantitativeValue outputObsAltitude, QuantitativeValue outputObjZenith, QuantitativeValue outputObjAzimuth, QuantitativeValue outputObjRange) {
+        this.outputTimeAfterStart = outputTimeAfterStart;
+        this.outputTimeToCoverage = outputTimeToCoverage;
+        this.outputAccessTime = outputAccessTime;
+        this.outputDownlinkLatency = outputDownlinkLatency;
+        this.outputRevisitTime = outputRevisitTime;
+        this.outputRepeatTime = outputRepeatTime;
+        this.outputCrossOverlap = outputCrossOverlap;
+        this.outputAlongOverlap = outputAlongOverlap;
+        this.outputNumPasses = outputNumPasses;
+        this.outputLunarPhase = outputLunarPhase;
+        this.outputObsZenith = outputObsZenith;
+        this.outputObsAzimuth = outputObsAzimuth;
+        this.outputSunZenith = outputSunZenith;
+        this.outputSunAzimuth = outputSunAzimuth;
+        this.outputSpatialResolution = outputSpatialResolution;
+        this.outputCrossSwath = outputCrossSwath;
+        this.outputAlongSwath = outputAlongSwath;
+        this.outputObsLatitude = outputObsLatitude;
+        this.outputObsLongitude = outputObsLongitude;
+        this.outputObsAltitude = outputObsAltitude;
+        this.outputObjZenith = outputObjZenith;
+        this.outputObjAzimuth = outputObjAzimuth;
+        this.outputObjRange = outputObjRange;
+    }
+
     public QuantitativeValue getOutputTimeAfterStart() {
         return outputTimeAfterStart;
     }

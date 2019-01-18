@@ -16,6 +16,16 @@ public class GroundStation {
     private final double elevation;
     private final List<String> commBand;
 
+    public GroundStation(String name, String acronym, Agency agency, double latitude, double longitude, double elevation, List<String> commBand) {
+        this.name = name;
+        this.acronym = acronym;
+        this.agency = agency;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.elevation = elevation;
+        this.commBand = commBand;
+    }
+
     public String getName() {
         return name;
     }

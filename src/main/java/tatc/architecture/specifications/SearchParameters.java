@@ -20,6 +20,22 @@ public class SearchParameters {
     private final int NFEtriggerDM;
     private final int nOperRepl;
 
+    public SearchParameters(int maxNFE, int populationSize, double epsilons, int sizeTournament, double pCrossover, double pMutation, double alpha, double beta, double pmin, String iOperators, String dOperators, int NFEtriggerDM, int nOperRepl) {
+        this.maxNFE = maxNFE;
+        this.populationSize = populationSize;
+        this.epsilons = epsilons;
+        this.sizeTournament = sizeTournament;
+        this.pCrossover = pCrossover;
+        this.pMutation = pMutation;
+        this.alpha = alpha;
+        this.beta = beta;
+        this.pmin = pmin;
+        this.iOperators = iOperators;
+        this.dOperators = dOperators;
+        this.NFEtriggerDM = NFEtriggerDM;
+        this.nOperRepl = nOperRepl;
+    }
+
     public int getMaxNFE() {
         return maxNFE;
     }
