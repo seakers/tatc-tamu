@@ -13,17 +13,13 @@ public class TradespaceSearchStrategyFF implements TradespaceSearchStrategy {
         this.properties=properties;
     }
 
-    public void start(){
-        String problem = properties.tsr.getMissionConcept().getProblemType();
-        switch (problem){
-            case "Walker":
-                startWalker();
-                break;
-            case "Train":
-                startTrain();
-                break;
-            default:
-                throw new IllegalArgumentException("No Problem Type found.");
+    public void start() throws IllegalArgumentException{
+        if (this.properties instanceof ProblemPropertiesWalker){
+            startWalker();
+        } else if (this.properties instanceof ProblemPropertiesTrain){
+            startTrain();
+        } else {
+            throw new IllegalArgumentException("No Problem Type found.");
         }
     }
 
@@ -31,9 +27,9 @@ public class TradespaceSearchStrategyFF implements TradespaceSearchStrategy {
     public void startWalker(){
         //TODO: make this readable
         //convert arraylists to array in order to pass into fullFactWalker
-        Double[] smaArray = ((ProblemPropertiesWalker)properties).smas.toArray(new Double[((ProblemPropertiesWalker)properties).smas.size()]);
-        Double[] incArray = ((ProblemPropertiesWalker)properties).inclination.toArray(new Double[((ProblemPropertiesWalker)properties).inclination.size()]);
-        Integer[] numSatsArray = ((ProblemPropertiesWalker)properties).numberOfSats.toArray(new Integer[((ProblemPropertiesWalker)properties).numberOfSats.size()]);
+        Double[] smaArray = ((ProblemPropertiesWalker)properties).getSmas().toArray(new Double[((ProblemPropertiesWalker)properties).getSmas().size()]);
+        Double[] incArray = ((ProblemPropertiesWalker)properties).getInclinations().toArray(new Double[((ProblemPropertiesWalker)properties).getInclinations().size()]);
+        Integer[] numSatsArray = ((ProblemPropertiesWalker)properties).getNumberOfSats().toArray(new Integer[((ProblemPropertiesWalker)properties).getNumberOfSats().size()]);
 
         //TODO: full factorial enumeration: use SystemArchitectureProblems
         ArrayList<WalkerParameters> constellationParams = EnumerateConstellations.fullFactWalker(smaArray, incArray, numSatsArray);
@@ -53,9 +49,9 @@ public class TradespaceSearchStrategyFF implements TradespaceSearchStrategy {
         //The LTANs should be defined somewhere in the tsr and ArrayList<Double> LTANs created in ProblemProperties
 
         //convert arraylists to array in order to pass into fullFactWalker
-        Double[] smaArray = ((ProblemPropertiesTrain)properties).smas.toArray(new Double[((ProblemPropertiesTrain)properties).smas.size()]);
+        Double[] smaArray = ((ProblemPropertiesTrain)properties).getSmas().toArray(new Double[((ProblemPropertiesTrain)properties).getSmas().size()]);
 
-        ArrayList<TrainParameters> constellationParams=EnumerateConstellations.fullFactTrain(smaArray,((ProblemPropertiesTrain)properties).LTANs);
+        ArrayList<TrainParameters> constellationParams=EnumerateConstellations.fullFactTrain(smaArray,((ProblemPropertiesTrain)properties).getLTANs());
 
         for (TrainParameters constellation : constellationParams) {
             //TODO:

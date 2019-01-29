@@ -18,12 +18,12 @@ public class LaunchVehicle {
     private final double massToLEO;
     private final double reliability;
     private final double cost;
-    private final String meanTimeBetweenLaunches;
-    //TODO: figure out final type of meanTimeBetweenLaunches
-    // public final double meanTimeBetweenLaunches;
+    private final Object meanTimeBetweenLaunches;
+    // private final double meanTimeBetweenLaunches;
+    // private final String meanTimeBetweenLaunches;
 
 
-    public LaunchVehicle(String name, String acronym, Agency agency, double payloadMass, double payloadVolume, double dryMass, double propellantMass, double specificImpulse, double massToLEO, double reliability, double cost, String meanTimeBetweenLaunches) {
+    public LaunchVehicle(String name, String acronym, Agency agency, double payloadMass, double payloadVolume, double dryMass, double propellantMass, double specificImpulse, double massToLEO, double reliability, double cost, Object meanTimeBetweenLaunches) {
         this.name = name;
         this.acronym = acronym;
         this.agency = agency;
@@ -82,7 +82,23 @@ public class LaunchVehicle {
         return cost;
     }
 
-    public String getMeanTimeBetweenLaunches() {
-        return meanTimeBetweenLaunches;
+    public Object getMeanTimeBetweenLaunches() throws IllegalArgumentException{
+        if (meanTimeBetweenLaunches instanceof Double){
+            return meanTimeBetweenLaunches;
+        }else if (meanTimeBetweenLaunches instanceof String){
+            return meanTimeBetweenLaunches;
+        }else {
+            throw new IllegalArgumentException("MeanTimeBetweenLaunches has to be either a double or a String in TradespaceSearch.json");
+        }
+    }
+
+    public Class getMeanTimeBetweenLaunchesType() throws IllegalArgumentException {
+        if (meanTimeBetweenLaunches instanceof String) {
+            return String.class;
+        } else if (meanTimeBetweenLaunches instanceof Double) {
+            return Double.class;
+        } else {
+            throw new IllegalArgumentException("MeanTimeBetweenLaunches has to be either a double or a String in TradespaceSearch.json");
+        }
     }
 }

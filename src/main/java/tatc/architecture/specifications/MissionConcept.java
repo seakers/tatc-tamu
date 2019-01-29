@@ -13,14 +13,14 @@ public class MissionConcept {
     private final Agency agency;
     private final String start;
     private final String end;
-    private final String duration;
-    //TODO: figure out final type of duration
-    // public final double duration;
+    private final Object duration;
+    // private final String duration;
+    // private final double duration;
     private final Region target;
     private final List<String> objects;
     private final List<MissionObjective> objectives;
 
-    public MissionConcept(String name, String acronym, Agency agency, String start, String end, String duration, Region target, List<String> objects, List<MissionObjective> objectives) {
+    public MissionConcept(String name, String acronym, Agency agency, String start, String end, Object duration, Region target, List<String> objects, List<MissionObjective> objectives) {
         this.name = name;
         this.acronym = acronym;
         this.agency = agency;
@@ -52,8 +52,24 @@ public class MissionConcept {
         return end;
     }
 
-    public String getDuration() {
-        return duration;
+    public Object getDuration() throws IllegalArgumentException{
+        if (duration instanceof Double){
+            return duration;
+        }else if (duration instanceof String){
+            return duration;
+        }else {
+            throw new IllegalArgumentException("Duration has to be either a Double or a String in TradespaceSearch.json");
+        }
+    }
+
+    public Class getDurationType() throws IllegalArgumentException{
+        if (duration instanceof String){
+            return String.class;
+        }else if (duration instanceof Double){
+            return Double.class;
+        }else {
+            throw new IllegalArgumentException("Duration has to be either a Double or a String in TradespaceSearch.json");
+        }
     }
 
     public Region getTarget() {

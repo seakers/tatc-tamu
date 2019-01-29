@@ -21,12 +21,13 @@ public class SpectralImager {
     private final int numberPixels;
     private final double dataRate;
     private final String solarConditions;
-    private final double orientation;
-    //TODO: or it can be a string
+    private final Object orientation;
+    // private final double orientation;
+    // private final String orientation;
     private final double minSignalNoiseRatio;
     private final double detectiveQuantumEfficiency;
 
-    public SpectralImager(String name, String acronym, Agency agency, double mass, double volume, double power, List<Double> operatingWavelength, int pixelBitDepth, double fieldOfView, String fieldOfViewShape, int numberPixels, double dataRate, String solarConditions, double orientation, double minSignalNoiseRatio, double detectiveQuantumEfficiency) {
+    public SpectralImager(String name, String acronym, Agency agency, double mass, double volume, double power, List<Double> operatingWavelength, int pixelBitDepth, double fieldOfView, String fieldOfViewShape, int numberPixels, double dataRate, String solarConditions, Object orientation, double minSignalNoiseRatio, double detectiveQuantumEfficiency) {
         this.name = name;
         this.acronym = acronym;
         this.agency = agency;
@@ -97,8 +98,24 @@ public class SpectralImager {
         return fieldOfViewShape;
     }
 
-    public double getOrientation() {
-        return orientation;
+    public Object getOrientation() throws IllegalArgumentException{
+        if (orientation instanceof Double){
+            return orientation;
+        }else if (orientation instanceof String){
+            return orientation;
+        }else {
+            throw new IllegalArgumentException("Orientation has to be either a Double or a String in TradespaceSearch.json");
+        }
+    }
+
+    public Class getDurationType() throws IllegalArgumentException{
+        if (orientation instanceof String){
+            return String.class;
+        }else if (orientation instanceof Double){
+            return Double.class;
+        }else {
+            throw new IllegalArgumentException("Orientation has to be either a Double or a String in TradespaceSearch.json");
+        }
     }
 
     public double getMinSignalNoiseRatio() {

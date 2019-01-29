@@ -2,6 +2,8 @@ package tatc.tradespaceiterator;
 
 import java.io.File;
 import java.util.Properties;
+
+import tatc.architecture.specifications.TradespaceSearch;
 import tatc.util.JSONIO;
 
 /**
@@ -15,34 +17,31 @@ public class TradespaceSearchExecutive {
 
         this.setDirectories();
 
-        TradespaceSearchRequest tsr = JSONIO.readJSON( new File(System.getProperty("tatc.root"), "TradespaceSearchRequest.json"),
-                TradespaceSearchRequest.class);
+        TradespaceSearch tsr = JSONIO.readJSON( new File(System.getProperty("tatc.root"), "TradespaceSearch.json"),
+                TradespaceSearch.class);
 
         Properties properties = new Properties();
         
         ProblemProperties searchProperties = this.createProblemProperties(tsr, properties);
 
-        TradespaceSearchStrategy problem = this.createTradespaceSearchIterator(tsr, searchProperties);
+        TradespaceSearchStrategy problem = this.createTradespaceSearchtrategy(tsr, searchProperties);
 
         problem.start();
-
-        searchProperties.rm.shutdown();
-
     }
     
-    public outputs evaluateArchitecture(File architectureJSONFile) {
-        return outputs;
-    }
+//    public outputs evaluateArchitecture(File architectureJSONFile) {
+//        return outputs;
+//    }
 
-    private TradespaceSearchStrategy createTradespaceSearchIterator(TradespaceSearchRequest tsr, ProblemProperties searchProperties) throws IllegalArgumentException {
+    private TradespaceSearchStrategy createTradespaceSearchtrategy(TradespaceSearch tsr, ProblemProperties searchProperties) throws IllegalArgumentException {
         
-        switch (tsr.getMissionConcept().getSearchPreferences()) {
+        switch (tsr.getSettings().getSearchPreference()) {
             case "FF":
                 return new TradespaceSearchStrategyFF(searchProperties);
-            case "MOEA":
+            case "GA":
                 return new TradespaceSearchStrategyMOEA(searchProperties);
-            case "AOS":
-                return new TradespaceSearchStrategyAOS(searchProperties);
+//            case "AOS":
+//                return new TradespaceSearchStrategyAOS(searchProperties);
             case "KDO":
                 return new TradespaceSearchStrategyKDO(searchProperties);
             default:
@@ -50,13 +49,13 @@ public class TradespaceSearchExecutive {
         }
     }
 
-    private ProblemProperties createProblemProperties(TradespaceSearchRequest tsr, Properties properties) throws IllegalArgumentException {
+    private ProblemProperties createProblemProperties(TradespaceSearch tsr, Properties properties) throws IllegalArgumentException {
         
-        switch (tsr.getMissionConcept().getProblemType()) {
-            case "Walker":
-                return new ProblemPropertiesWalker(tsr, properties);
-            case "Train":
-                return new ProblemPropertiesTrain(tsr, properties);
+        switch (tsr.getDesignSpace().getConstellations().get(0).getConstellationType()) {
+            case "DELTA_HOMOGENOUS":
+                return new ProblemPropertiesWalker(tsr);
+            case "TRAIN":
+                return new ProblemPropertiesTrain(tsr);
             default:
                 throw new IllegalArgumentException("Problem Type has to be either Walker or Train.");
         }

@@ -33,15 +33,13 @@ public abstract class TradespaceSearchStrategyGA implements TradespaceSearchStra
         this.selection=new TournamentSelection(2, comparator);
     }
 
-    protected  Problem createProblem(ProblemProperties properties){
-        String problemType=properties.tsr.getMissionConcept().getProblemType();
-        switch (problemType){
-            case "Walker":
-                return new ProblemGAWalker(properties);
-            case "Train":
-                return new ProblemGATrain(properties);
-            default:
-                throw new IllegalArgumentException("No Problem Type found.");
+    protected  Problem createProblem(ProblemProperties properties) throws IllegalArgumentException{
+        if (this.properties instanceof ProblemPropertiesWalker){
+            return new ProblemGAWalker(properties);
+        } else if (this.properties instanceof ProblemPropertiesTrain){
+            return new ProblemGATrain(properties);
+        } else {
+            throw new IllegalArgumentException("No Problem Type found.");
         }
     }
 

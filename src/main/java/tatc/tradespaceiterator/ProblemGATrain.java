@@ -42,8 +42,8 @@ public class ProblemGATrain extends AbstractProblem {
         
         Solution sol = new StandardFormArchitecture(getNumberOfVariables(), getNumberOfObjectives());
         
-        sol.setVariable(0, new IntegerVariable(0, 0, ((ProblemPropertiesTrain)properties).smas.size() - 1));
-        sol.setVariable(1, new BinaryVariable(((ProblemPropertiesTrain)properties).LTANs.size()));
+        sol.setVariable(0, new IntegerVariable(0, 0, ((ProblemPropertiesTrain)properties).getSmas().size() - 1));
+        sol.setVariable(1, new BinaryVariable(((ProblemPropertiesTrain)properties).getLTANs().size()));
         
         return sol;
     }

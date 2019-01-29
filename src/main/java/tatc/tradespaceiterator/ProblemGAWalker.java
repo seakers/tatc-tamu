@@ -42,9 +42,9 @@ public class ProblemGAWalker extends AbstractProblem {
         
         Solution sol = new StandardFormArchitecture(getNumberOfVariables(), getNumberOfObjectives());
         
-        sol.setVariable(0, new IntegerVariable(0, 0, ((ProblemPropertiesWalker)properties).smas.size() - 1));
-        sol.setVariable(1, new IntegerVariable(0, 0, ((ProblemPropertiesWalker)properties).inclination.size() - 1));
-        sol.setVariable(2, new IntegerVariable(0, 0, ((ProblemPropertiesWalker)properties).numberOfSats.size() - 1));
+        sol.setVariable(0, new IntegerVariable(0, 0, ((ProblemPropertiesWalker)properties).getSmas().size() - 1));
+        sol.setVariable(1, new IntegerVariable(0, 0, ((ProblemPropertiesWalker)properties).getInclinations().size() - 1));
+        sol.setVariable(2, new IntegerVariable(0, 0, ((ProblemPropertiesWalker)properties).getNumberOfSats().size() - 1));
         sol.setVariable(3, new RealVariable(0, 1)); //planes
         sol.setVariable(4, new RealVariable(0, 1)); //phasing
         

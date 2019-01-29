@@ -47,7 +47,7 @@ public class MonolithVariable extends SatelliteVariable {
      *
      * @param smaBound The bounds on the semi major axis [m]
      * @param eccBound The bounds on the eccentricity
-     * @param incBound The bounds on the inclination [rad]
+     * @param incBound The bounds on the inclinations [rad]
      */
     public MonolithVariable(Bounds<Double> smaBound, Bounds<Double> eccBound,
             Bounds<Double> incBound) {
@@ -64,7 +64,7 @@ public class MonolithVariable extends SatelliteVariable {
      * @param instIDBound The bounds on the instrument id
      * @param smaBound The bounds on the semi major axis [m]
      * @param eccBound The bounds on the eccentricity
-     * @param incBound The bounds on the inclination [rad]
+     * @param incBound The bounds on the inclinations [rad]
      */
     public MonolithVariable(Bounds<Integer> obsIDBound, Bounds<Integer> instIDBound,
             Bounds<Double> smaBound, Bounds<Double> eccBound,
@@ -80,7 +80,7 @@ public class MonolithVariable extends SatelliteVariable {
      *
      * @param smaBound The bounds on the semi major axis [m]
      * @param eccBound The bounds on the eccentricity
-     * @param incBound The bounds on the inclination [rad]
+     * @param incBound The bounds on the inclinations [rad]
      * @param argPerBound The bounds on the argument of perigee [rad]
      * @param raanBound The bounds on the right ascension of the ascending node
      * [rad]
@@ -101,7 +101,7 @@ public class MonolithVariable extends SatelliteVariable {
      * @param instIDBound The bounds on the instrument id
      * @param smaBound The bounds on the semi major axis [m]
      * @param eccBound The bounds on the eccentricity
-     * @param incBound The bounds on the inclination [rad]
+     * @param incBound The bounds on the inclinations [rad]
      * @param argPerBound The bounds on the argument of perigee [rad]
      * @param raanBound The bounds on the right ascension of the ascending node
      * [rad]

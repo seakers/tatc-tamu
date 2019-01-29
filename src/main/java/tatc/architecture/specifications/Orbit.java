@@ -11,22 +11,22 @@ package tatc.architecture.specifications;
 public class Orbit {
 
     private final String orbitType;
-    private final QuantitativeRange altitude;
-    //TODO: figure out final type of altitude
-    // public final double altitude;
-    public final double semimajorAxis;
-    private final QuantitativeRange inclination;
-    //TODO: figure out final type of inclination
-    // public final double inclination;
-    // public final String inclination;
-    public final double eccentricity;
-    public final double periapsisArgument;
-    public final double rightAscensionAscendingNode;
-    public final double trueAnomaly;
-    public final String epoch;
-    public final String localSolarTimeAscendingNode;
+    private final Object altitude;
+    // private final double altitude;
+    // private final QuantitativeRange altitude;
+    private final double semimajorAxis;
+    private final Object inclination;
+    // private final double inclinations;
+    // private final String inclinations;
+    // private final QuantitativeRange inclinations;
+    private final double eccentricity;
+    private final double periapsisArgument;
+    private final double rightAscensionAscendingNode;
+    private final double trueAnomaly;
+    private final String epoch;
+    private final String localSolarTimeAscendingNode;
 
-    public Orbit(String orbitType, QuantitativeRange altitude, double semimajorAxis, QuantitativeRange inclination, double eccentricity, double periapsisArgument, double rightAscensionAscendingNode, double trueAnomaly, String epoch, String localSolarTimeAscendingNode) {
+    public Orbit(String orbitType, Object altitude, double semimajorAxis, Object inclination, double eccentricity, double periapsisArgument, double rightAscensionAscendingNode, double trueAnomaly, String epoch, String localSolarTimeAscendingNode) {
         this.orbitType = orbitType;
         this.altitude = altitude;
         this.semimajorAxis = semimajorAxis;
@@ -43,16 +43,52 @@ public class Orbit {
         return orbitType;
     }
 
-    public QuantitativeRange getAltitude() {
-        return altitude;
+    public Object getAltitude() throws IllegalArgumentException{
+        if (altitude instanceof Double){
+            return altitude;
+        }else if (altitude instanceof QuantitativeRange){
+            return altitude;
+        }else {
+            throw new IllegalArgumentException("Altitude has to be either a Double or a QuantitativeRange in TradespaceSearch.json");
+        }
+    }
+
+    public Class getAltitudeType() throws IllegalArgumentException{
+        if (altitude instanceof Double){
+            return Double.class;
+        }else if (altitude instanceof QuantitativeRange){
+            return QuantitativeRange.class;
+        }else {
+            throw new IllegalArgumentException("Altitude has to be either a Double or a QuantitativeRange in TradespaceSearch.json");
+        }
     }
 
     public double getSemimajorAxis() {
         return semimajorAxis;
     }
 
-    public QuantitativeRange getInclination() {
-        return inclination;
+    public Object getInclination() throws IllegalArgumentException{
+        if (inclination instanceof Double){
+            return inclination;
+        }else if (inclination instanceof String){
+            return inclination;
+        }else if (inclination instanceof QuantitativeRange){
+            return inclination;
+        }else {
+            throw new IllegalArgumentException("Inclination has to be either a Double, a String or a QuantitativeRange in TradespaceSearch.json");
+        }
+    }
+
+    public Class getInclinationType() throws IllegalArgumentException{
+        if (inclination instanceof Double){
+            return Double.class;
+        }else if (inclination instanceof String){
+            return String.class;
+        }else if (inclination instanceof QuantitativeRange){
+            return QuantitativeRange.class;
+        }else {
+            throw new IllegalArgumentException("Inclination has to be either a Double, a String or a QuantitativeRange in TradespaceSearch.json");
+        }
     }
 
     public double getEccentricity() {

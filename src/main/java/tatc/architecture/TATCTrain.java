@@ -105,7 +105,7 @@ public class TATCTrain implements Architecture {
     @Override
     public File toJSON() {
         //TODO: Implement this
-        return new File();
+        return new File("");
     }
 
 }

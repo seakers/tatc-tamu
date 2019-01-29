@@ -1,5 +1,7 @@
 package tatc.architecture.specifications;
 
+import java.util.ArrayList;
+
 /**
  *
  Defines a range of quantitative values with minimum and maximum values and either a step size of equally-spaced steps.
@@ -33,5 +35,18 @@ public class QuantitativeRange {
 
     public int getNumberSteps() {
         return numberSteps;
+    }
+
+    public ArrayList<Double> discretize() {
+
+        double l = this.getMinValue();
+        double u = this.getMaxValue();
+
+        ArrayList<Double> values = new ArrayList<>();
+
+        for (double value = l; value <= u; value = value + this.getStepSize()) {
+            values.add(value);
+        }
+        return values;
     }
 }
