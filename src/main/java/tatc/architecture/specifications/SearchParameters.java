@@ -1,5 +1,7 @@
 package tatc.architecture.specifications;
 
+import java.util.ArrayList;
+
 /**
  * Contains the values of all the parameters needed to set up the genetic algorithm.
  * Used by: AnalysisSettings
@@ -8,7 +10,7 @@ public class SearchParameters {
 
     private final int maxNFE;
     private final int populationSize;
-    private final double epsilons;
+    private final ArrayList<Double> epsilons;
     private final int sizeTournament;
     private final double pCrossover;
     private final double pMutation;
@@ -20,7 +22,7 @@ public class SearchParameters {
     private final int NFEtriggerDM;
     private final int nOperRepl;
 
-    public SearchParameters(int maxNFE, int populationSize, double epsilons, int sizeTournament, double pCrossover, double pMutation, double alpha, double beta, double pmin, String iOperators, String dOperators, int NFEtriggerDM, int nOperRepl) {
+    public SearchParameters(int maxNFE, int populationSize, ArrayList<Double> epsilons, int sizeTournament, double pCrossover, double pMutation, double alpha, double beta, double pmin, String iOperators, String dOperators, int NFEtriggerDM, int nOperRepl) {
         this.maxNFE = maxNFE;
         this.populationSize = populationSize;
         this.epsilons = epsilons;
@@ -44,7 +46,7 @@ public class SearchParameters {
         return populationSize;
     }
 
-    public double getEpsilons() {
+    public ArrayList<Double> getEpsilons() {
         return epsilons;
     }
 

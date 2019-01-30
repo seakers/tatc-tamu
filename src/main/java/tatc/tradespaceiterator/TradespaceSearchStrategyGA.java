@@ -9,6 +9,8 @@ import org.moeaframework.core.comparator.ParetoDominanceComparator;
 import org.moeaframework.core.operator.RandomInitialization;
 import org.moeaframework.core.operator.TournamentSelection;
 
+import java.util.ArrayList;
+
 public abstract class TradespaceSearchStrategyGA implements TradespaceSearchStrategy {
     public final ProblemProperties properties;
     public final Problem problem;
@@ -23,14 +25,15 @@ public abstract class TradespaceSearchStrategyGA implements TradespaceSearchStra
     public TradespaceSearchStrategyGA(ProblemProperties properties) {
         this.properties=properties;
         this.problem=createProblem(properties);
-        this.maxNFE=10;
-        this.populationSize=2;
+        this.maxNFE=properties.getTradespaceSearch().getSettings().getSearchParameters().getMaxNFE();
+        this.populationSize=properties.getTradespaceSearch().getSettings().getSearchParameters().getPopulationSize();
         this.initialization=new RandomInitialization(this.problem, populationSize);
         this.population=new Population();
         this.comparator=new ParetoDominanceComparator();
         //10k$ cost and 60seconds rev time
-        this.archive=new EpsilonBoxDominanceArchive(new double[]{10, 10});
-        this.selection=new TournamentSelection(2, comparator);
+        ArrayList<Double> epsilon = properties.getTradespaceSearch().getSettings().getSearchParameters().getEpsilons();
+        this.archive=new EpsilonBoxDominanceArchive(new double[]{epsilon.get(0), epsilon.get(1)});
+        this.selection=new TournamentSelection(properties.getTradespaceSearch().getSettings().getSearchParameters().getSizeTournament(), comparator);
     }
 
     protected  Problem createProblem(ProblemProperties properties) throws IllegalArgumentException{
