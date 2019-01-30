@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 public class TradespaceSearchStrategyFF implements TradespaceSearchStrategy {
     ProblemProperties properties;
+
+    private int counter = 0;
     
     public TradespaceSearchStrategyFF(ProblemProperties properties){
         this.properties=properties;
@@ -38,8 +40,10 @@ public class TradespaceSearchStrategyFF implements TradespaceSearchStrategy {
         for (WalkerParameters constellation : constellationParams) {
             //TODO:
             // 1. From constellation, create a TATCWalker object
-            // 2. create the Architecture JSON file using the method toJSON() from TATCWalker
+            // 2. create the ArchitectureMethods JSON file using the method toJSON() from TATCWalker
             // 3. Call TradespaceSearchExecutive.evaluate(JSONfile)
+
+            this.incrementCounter();
         }
 
     }
@@ -56,8 +60,18 @@ public class TradespaceSearchStrategyFF implements TradespaceSearchStrategy {
         for (TrainParameters constellation : constellationParams) {
             //TODO:
             // 1. From constellation, create a TATCTrain object
-            // 2. create the Architecture JSON file using the method toJSON() from TATCTrain
+            // 2. create the ArchitectureMethods JSON file using the method toJSON() from TATCTrain
             // 3. Call TradespaceSearchExecutive.evaluate(JSONfile)
+
+            this.incrementCounter();
         }
+    }
+
+    public int getCounter() {
+        return counter;
+    }
+
+    private void incrementCounter(){
+        this.counter++;
     }
 }

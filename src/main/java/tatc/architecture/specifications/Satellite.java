@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * An entity orbiting the Earth in support of mission objectives.
- * Used by: ArchitectureConstraints, Architecture
+ * Used by: ArchitectureConstraints, ArchitectureMethods
  */
 
 public class Satellite {

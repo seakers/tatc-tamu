@@ -2,7 +2,7 @@ package tatc.architecture.specifications;
 
 /**
  * A network of ground stations providing uplink and downlink connectivity for a mission.
- * Used by: ArchitectureConstraints, Architecture
+ * Used by: ArchitectureConstraints, ArchitectureMethods
  */
 public class GroundNetwork {
 

@@ -10,6 +10,8 @@ public class ProblemGAWalker extends AbstractProblem {
     
     ProblemProperties properties;
 
+    private int counter = 0;
+
     public ProblemGAWalker(ProblemProperties properties){
         //TODO: variables for objectives
         super(5, 2);
@@ -29,14 +31,22 @@ public class ProblemGAWalker extends AbstractProblem {
         
         //TODO:
         // 1. From the gene, create a TATCWalker object
-        // 2. create the Architecture JSON file using the method toJSON() from TATCWalker
+        // 2. create the ArchitectureMethods JSON file using the method toJSON() from TATCWalker
         // 3. Call TradespaceSearchExecutive.evaluate(JSONfile)
 
-        
+        incrementCounter();
+    }
+
+    public int getCounter() {
+        return counter;
+    }
+
+    private void incrementCounter(){
+        this.counter++;
     }
 
     //structure of solution with walker params
-    //TODO:create Architecture.json creator in StandardFormArchitecture class
+    //TODO:create ArchitectureMethods.json creator in StandardFormArchitecture class
     @Override
     public final Solution newSolution() {
         

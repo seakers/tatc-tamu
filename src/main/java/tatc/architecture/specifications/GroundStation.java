@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * A surface facility providing uplink or downlink communication services to satellites.
- * Used by: ArchitectureConstraints, Architecture
+ * Used by: ArchitectureConstraints, ArchitectureMethods
  */
 public class GroundStation {
 

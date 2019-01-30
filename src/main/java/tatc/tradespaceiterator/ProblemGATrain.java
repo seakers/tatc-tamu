@@ -10,6 +10,8 @@ public class ProblemGATrain extends AbstractProblem {
     
     ProblemProperties properties;
 
+    private int counter = 0;
+
     public ProblemGATrain(ProblemProperties properties){
         super(2, 2);
         this.properties=properties;
@@ -30,10 +32,18 @@ public class ProblemGATrain extends AbstractProblem {
 
         //TODO:
         // 1. From the gene, create a TATCTrain object
-        // 2. create the Architecture JSON file using the method toJSON() from TATCTrain
+        // 2. create the ArchitectureMethods JSON file using the method toJSON() from TATCTrain
         // 3. Call TradespaceSearchExecutive.evaluate(JSONfile)
-        
 
+        this.incrementCounter();
+    }
+
+    public int getCounter() {
+        return counter;
+    }
+
+    private void incrementCounter(){
+        this.counter++;
     }
 
     //structure of solution with walker params

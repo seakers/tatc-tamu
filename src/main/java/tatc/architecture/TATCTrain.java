@@ -1,19 +1,23 @@
 package tatc.architecture;
 
-import java.io.File;
 import org.orekit.errors.OrekitException;
 import org.orekit.time.TimeScalesFactory;
 import org.orekit.utils.Constants;
 import seakers.conmop.util.Bounds;
 import seakers.orekit.util.Orbits;
 import org.orekit.time.AbsoluteDate;
+import tatc.architecture.specifications.Orbit;
+import tatc.tradespaceiterator.ProblemProperties;
+
 import java.util.HashSet;
 import java.util.ArrayList;
-import tatc.architecture.variable.MonolithVariable;
+import java.util.List;
 
-public class TATCTrain implements Architecture {
+public class TATCTrain implements ArchitectureMethods {
 
-    private final HashSet<MonolithVariable> satellites;
+    private final ProblemProperties properties;
+
+    private final List<Orbit> satellites;
 
     private final double sma;
 
@@ -26,7 +30,7 @@ public class TATCTrain implements Architecture {
      * hours. The satellites contained in this constellation are not assigned any instrumentation nor are any
      * steering/attitude laws.
      */
-    public TATCTrain(double semiMajorAxis, int dayLaunch, int monthLaunch, int yearLaunch, ArrayList<Double> LTANs, AbsoluteDate startDate) throws OrekitException {
+    public TATCTrain(double semiMajorAxis, int dayLaunch, int monthLaunch, int yearLaunch, ArrayList<Double> LTANs, AbsoluteDate startDate, ProblemProperties props) throws OrekitException {
         final double inc = Orbits.incSSO(semiMajorAxis - Constants.WGS84_EARTH_EQUATORIAL_RADIUS);
         this.satellites = new HashSet<>(LTANs.size());
         double raanRef0 = Orbits.LTAN2RAAN(semiMajorAxis - Constants.WGS84_EARTH_EQUATORIAL_RADIUS, LTANs.get(0), dayLaunch, monthLaunch, yearLaunch);
@@ -53,7 +57,7 @@ public class TATCTrain implements Architecture {
         this.LTANs = LTANs;
     }
 
-    public TATCTrain(double semiMajorAxis, ArrayList<Double> LTANs, AbsoluteDate startDate) throws OrekitException {
+    public TATCTrain(double semiMajorAxis, ArrayList<Double> LTANs, AbsoluteDate startDate, ProblemProperties props) throws OrekitException {
         final double inc = Orbits.incSSO(semiMajorAxis - Constants.WGS84_EARTH_EQUATORIAL_RADIUS);
         this.satellites = new HashSet<>(LTANs.size());
         double raanRef0 = Orbits.LTAN2RAAN(semiMajorAxis - Constants.WGS84_EARTH_EQUATORIAL_RADIUS, LTANs.get(0),
@@ -103,9 +107,9 @@ public class TATCTrain implements Architecture {
     }
 
     @Override
-    public File toJSON() {
+    public boolean toJSON(int counter) {
         //TODO: Implement this
-        return new File("");
+        return true;
     }
 
 }

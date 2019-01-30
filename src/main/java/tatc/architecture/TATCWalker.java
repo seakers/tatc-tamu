@@ -6,18 +6,34 @@
 package tatc.architecture;
 
 import java.io.File;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hipparchus.util.FastMath;
-import seakers.conmop.util.Bounds;
-import tatc.architecture.variable.MonolithVariable;
+import org.orekit.utils.Constants;
+import tatc.architecture.specifications.*;
+import tatc.tradespaceiterator.ProblemProperties;
+import tatc.util.JSONIO;
 
 /**
  *
  * @author Prachi
  */
-public class TATCWalker implements Architecture{
+public class TATCWalker implements ArchitectureMethods{
 
-    private final HashSet<MonolithVariable> satellites;
+    private final ProblemProperties properties;
+
+    private final List<Orbit> orbits;
+
+    private final double semimajoraxis;
+
+    private final double inclination;
+
+    private final int numberSatellites;
+
+    private final int numberPlanes;
+
+    private final int relativeSpacing;
 
     /**
      * Creates a walker delta-pattern constellation in the specified Walker
@@ -26,7 +42,14 @@ public class TATCWalker implements Architecture{
      * steering/attitude laws. Can specify where the reference raan and true
      * anomaly to orient the walker configuration
      */
-    public TATCWalker(double semimajoraxis, double inc, int t, int p, int f) {
+    public TATCWalker(double semimajoraxis, double inc, int t, int p, int f, ProblemProperties props) {
+
+        this.semimajoraxis=semimajoraxis;
+        this.inclination=inc;
+        this.numberSatellites=t;
+        this.numberPlanes=p;
+        this.relativeSpacing=f;
+        this.properties=props;
 
         //checks for valid parameters
         if (t < 0 || p < 0) {
@@ -54,34 +77,66 @@ public class TATCWalker implements Architecture{
         final double refAnom = 0;
         final double refRaan = 0;
 
-        this.satellites = new HashSet<>(t);
+        this.orbits = new ArrayList<>();
         for (int planeNum = 0; planeNum < p; planeNum++) {
             for (int satNum = 0; satNum < s; satNum++) {
-                MonolithVariable mono = new MonolithVariable(
-                        new Bounds(semimajoraxis,semimajoraxis), 
-                        new Bounds(0.0,0.0), new Bounds(inc,inc));
-                
-                mono.setSma(semimajoraxis);
-                mono.setEcc(0.0);
-                mono.setInc(inc);
-                mono.setRaan(refRaan + planeNum * delRaan);
-                mono.setArgPer(0.0);
-                double anom = (refAnom + satNum * delAnom + phasing * planeNum) % (2. * FastMath.PI);
-                //since eccentricity = 0, doesn't matter if using true or mean anomaly
-                mono.setTrueAnomaly(anom);
-                this.satellites.add(mono);
+                Orbit orbit = new Orbit("KEPLERIAN",semimajoraxis - Constants.WGS84_EARTH_EQUATORIAL_RADIUS,
+                        semimajoraxis,inclination,0.0,0.0,
+                        refRaan + planeNum * delRaan,
+                        (refAnom + satNum * delAnom + phasing * planeNum) % (2. * FastMath.PI),
+                        properties.getTradespaceSearch().getMission().getStart(),
+                        "");
+                this.orbits.add(orbit);
             }
         }
     }
 
-    public HashSet<MonolithVariable> getSatellites() {
-        return satellites;
+    public List<Orbit> getOrbits() {
+        return orbits;
     }
-    
+
+    public double getSemimajoraxis() {
+        return semimajoraxis;
+    }
+
+    public double getInclination() {
+        return inclination;
+    }
+
+    public int getNumberSatellites() {
+        return numberSatellites;
+    }
+
+    public int getNumberPlanes() {
+        return numberPlanes;
+    }
+
+    public int getRelativeSpacing() {
+        return relativeSpacing;
+    }
+
     @Override
-    public File toJSON() {
+    public boolean toJSON(int counter) {
         //TODO: Implement this
-        return new File("");
+        List<Satellite> satellites = new ArrayList<>();
+        Satellite satelliteFromTradespaceSearch=this.properties.getTradespaceSearch().getDesignSpace().getSatellites().get(0);
+        for (Orbit orbit : this.getOrbits()){
+            satellites.add(new Satellite(satelliteFromTradespaceSearch.getName(),
+                    satelliteFromTradespaceSearch.getAcronym(),
+                    satelliteFromTradespaceSearch.getAgency(),
+                    satelliteFromTradespaceSearch.getMass(),
+                    satelliteFromTradespaceSearch.getVolume(),
+                    satelliteFromTradespaceSearch.getPower(),
+                    satelliteFromTradespaceSearch.getCommBand(),
+                    satelliteFromTradespaceSearch.getPayload(),
+                    orbit));
+        }
+        Constellation constellation=new Constellation("DELTA_HOMOGENOUS",this.getNumberSatellites(),this.getNumberPlanes(),this.getRelativeSpacing(),this.getOrbits(),null,satellites);
+        GroundNetwork groundNetwork=this.properties.getTradespaceSearch().getDesignSpace().getGroundNetworks().get(0);
+        Architecture arch =new Architecture(constellation, groundNetwork);
+        File mainPath = new File(System.getProperty("user.dir"), "problems");
+        File file = new File (mainPath,"Architecture"+Integer.toString(counter)+".json");
+        return JSONIO.writeJSON(file,arch);
     }
 
 }
