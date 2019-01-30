@@ -117,7 +117,6 @@ public class TATCWalker implements ArchitectureMethods{
 
     @Override
     public boolean toJSON(int counter) {
-        //TODO: Implement this
         List<Satellite> satellites = new ArrayList<>();
         Satellite satelliteFromTradespaceSearch=this.properties.getTradespaceSearch().getDesignSpace().getSatellites().get(0);
         for (Orbit orbit : this.getOrbits()){

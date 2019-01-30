@@ -1,14 +1,17 @@
 package tatc.architecture;
 
+import org.hipparchus.util.FastMath;
 import org.orekit.errors.OrekitException;
 import org.orekit.time.TimeScalesFactory;
 import org.orekit.utils.Constants;
 import seakers.conmop.util.Bounds;
 import seakers.orekit.util.Orbits;
 import org.orekit.time.AbsoluteDate;
-import tatc.architecture.specifications.Orbit;
+import tatc.architecture.specifications.*;
 import tatc.tradespaceiterator.ProblemProperties;
+import tatc.util.JSONIO;
 
+import java.io.File;
 import java.util.HashSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +20,7 @@ public class TATCTrain implements ArchitectureMethods {
 
     private final ProblemProperties properties;
 
-    private final List<Orbit> satellites;
+    private final List<Orbit> orbits;
 
     private final double sma;
 
@@ -31,8 +34,9 @@ public class TATCTrain implements ArchitectureMethods {
      * steering/attitude laws.
      */
     public TATCTrain(double semiMajorAxis, int dayLaunch, int monthLaunch, int yearLaunch, ArrayList<Double> LTANs, AbsoluteDate startDate, ProblemProperties props) throws OrekitException {
+        this.properties = props;
         final double inc = Orbits.incSSO(semiMajorAxis - Constants.WGS84_EARTH_EQUATORIAL_RADIUS);
-        this.satellites = new HashSet<>(LTANs.size());
+        this.orbits = new ArrayList<>(LTANs.size());
         double raanRef0 = Orbits.LTAN2RAAN(semiMajorAxis - Constants.WGS84_EARTH_EQUATORIAL_RADIUS, LTANs.get(0), dayLaunch, monthLaunch, yearLaunch);
         int hourLTAN = LTANs.get(0).intValue();
         int minLTAN = (int) (LTANs.get(0) * 60) % 60;
@@ -41,16 +45,13 @@ public class TATCTrain implements ArchitectureMethods {
         double timeLaunchStartDate = startDate.durationFrom(launchDate) / 3600;
         double raanRef = (raanRef0 + (timeLaunchStartDate / 24 * 2 * Math.PI)) % (2 * Math.PI);
         for (int i = 0; i < LTANs.size(); i++) {
-            MonolithVariable mono = new MonolithVariable(new Bounds(semiMajorAxis, semiMajorAxis),
-                    new Bounds(0.0, 0.0), new Bounds(inc, inc));
-            mono.setSma(semiMajorAxis);
-            mono.setEcc(0.0);
-            mono.setInc(inc);
-            mono.setRaan((raanRef + ((LTANs.get(i) - LTANs.get(0)) / 24 * 2 * Math.PI)) % (2 * Math.PI));
-            mono.setArgPer(0.0);
-            double anom = (2 * Math.PI - ((LTANs.get(i) - LTANs.get(0)) / (Orbits.circularOrbitPeriod(semiMajorAxis) / 3600) * 2 * Math.PI)) % (2 * Math.PI);
-            mono.setTrueAnomaly(anom);
-            this.satellites.add(mono);
+            Orbit orbit = new Orbit("KEPLERIAN",semiMajorAxis- Constants.WGS84_EARTH_EQUATORIAL_RADIUS,
+                    semiMajorAxis,inc,0.0,0.0,
+                    (raanRef + ((LTANs.get(i) - LTANs.get(0)) / 24 * 2 * Math.PI)) % (2 * Math.PI),
+                    (2 * Math.PI - ((LTANs.get(i) - LTANs.get(0)) / (Orbits.circularOrbitPeriod(semiMajorAxis) / 3600) * 2 * Math.PI)) % (2 * Math.PI),
+                    properties.getTradespaceSearch().getMission().getStart(),Double.toString(LTANs.get(i)));
+
+            this.orbits.add(orbit);
         }
         this.inclination = inc;
         this.sma = semiMajorAxis;
@@ -58,8 +59,9 @@ public class TATCTrain implements ArchitectureMethods {
     }
 
     public TATCTrain(double semiMajorAxis, ArrayList<Double> LTANs, AbsoluteDate startDate, ProblemProperties props) throws OrekitException {
+        this.properties = props;
         final double inc = Orbits.incSSO(semiMajorAxis - Constants.WGS84_EARTH_EQUATORIAL_RADIUS);
-        this.satellites = new HashSet<>(LTANs.size());
+        this.orbits = new ArrayList<>(LTANs.size());
         double raanRef0 = Orbits.LTAN2RAAN(semiMajorAxis - Constants.WGS84_EARTH_EQUATORIAL_RADIUS, LTANs.get(0),
                 startDate.getComponents(TimeScalesFactory.getUTC()).getDate().getDay(),
                 startDate.getComponents(TimeScalesFactory.getUTC()).getDate().getMonth(),
@@ -74,16 +76,12 @@ public class TATCTrain implements ArchitectureMethods {
         double timeLaunchStartDate = startDate.durationFrom(launchDate) / 3600;
         double raanRef = (raanRef0 + (timeLaunchStartDate / 24 * 2 * Math.PI)) % (2 * Math.PI);
         for (int i = 0; i < LTANs.size(); i++) {
-            MonolithVariable mono = new MonolithVariable(new Bounds(semiMajorAxis, semiMajorAxis),
-                    new Bounds(0.0, 0.0), new Bounds(inc, inc));
-            mono.setSma(semiMajorAxis);
-            mono.setEcc(0.0);
-            mono.setInc(inc);
-            mono.setRaan((raanRef + ((LTANs.get(i) - LTANs.get(0)) / 24 * 2 * Math.PI)) % (2 * Math.PI));
-            mono.setArgPer(0.0);
-            double anom = (2 * Math.PI - ((LTANs.get(i) - LTANs.get(0)) / (Orbits.circularOrbitPeriod(semiMajorAxis) / 3600) * 2 * Math.PI)) % (2 * Math.PI);
-            mono.setTrueAnomaly(anom);
-            this.satellites.add(mono);
+            Orbit orbit = new Orbit("KEPLERIAN",semiMajorAxis- Constants.WGS84_EARTH_EQUATORIAL_RADIUS,
+                    semiMajorAxis,inc,0.0,0.0,
+                    (raanRef + ((LTANs.get(i) - LTANs.get(0)) / 24 * 2 * Math.PI)) % (2 * Math.PI),
+                    (2 * Math.PI - ((LTANs.get(i) - LTANs.get(0)) / (Orbits.circularOrbitPeriod(semiMajorAxis) / 3600) * 2 * Math.PI)) % (2 * Math.PI),
+                    properties.getTradespaceSearch().getMission().getStart(),Double.toString(LTANs.get(i)));
+            this.orbits.add(orbit);
         }
         this.inclination = inc;
         this.sma = semiMajorAxis;
@@ -102,14 +100,34 @@ public class TATCTrain implements ArchitectureMethods {
         return LTANs;
     }
 
-    public HashSet<MonolithVariable> getSatellites() {
-        return satellites;
+    public List<Orbit> getOrbits() {
+        return orbits;
     }
 
     @Override
     public boolean toJSON(int counter) {
-        //TODO: Implement this
-        return true;
+        List<Satellite> satellites = new ArrayList<>();
+        Satellite satelliteFromTradespaceSearch=this.properties.getTradespaceSearch().getDesignSpace().getSatellites().get(0);
+        Constellation constellationFromTradespaceSearch=this.properties.getTradespaceSearch().getDesignSpace().getConstellations().get(0);
+        for (Orbit orbit : this.getOrbits()){
+            satellites.add(new Satellite(satelliteFromTradespaceSearch.getName(),
+                    satelliteFromTradespaceSearch.getAcronym(),
+                    satelliteFromTradespaceSearch.getAgency(),
+                    satelliteFromTradespaceSearch.getMass(),
+                    satelliteFromTradespaceSearch.getVolume(),
+                    satelliteFromTradespaceSearch.getPower(),
+                    satelliteFromTradespaceSearch.getCommBand(),
+                    satelliteFromTradespaceSearch.getPayload(),
+                    orbit));
+        }
+        Constellation constellation=new Constellation("DELTA_HOMOGENOUS",this.getOrbits().size(),
+                null,null,this.getOrbits(),
+                constellationFromTradespaceSearch.getSatelliteInterval(),satellites);
+        GroundNetwork groundNetwork=this.properties.getTradespaceSearch().getDesignSpace().getGroundNetworks().get(0);
+        Architecture arch =new Architecture(constellation, groundNetwork);
+        File mainPath = new File(System.getProperty("user.dir"), "problems");
+        File file = new File (mainPath,"Architecture"+Integer.toString(counter)+".json");
+        return JSONIO.writeJSON(file,arch);
     }
 
 }
