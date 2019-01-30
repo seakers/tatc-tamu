@@ -130,7 +130,8 @@ public class TATCWalker implements ArchitectureMethods{
                     satelliteFromTradespaceSearch.getPayload(),
                     orbit));
         }
-        Constellation constellation=new Constellation("DELTA_HOMOGENOUS",this.getNumberSatellites(),this.getNumberPlanes(),this.getRelativeSpacing(),this.getOrbits(),null,satellites);
+        Constellation constellation=new Constellation(properties.getTradespaceSearch().getDesignSpace().getConstellations().get(0).getConstellationType(),
+                this.getNumberSatellites(),this.getNumberPlanes(),this.getRelativeSpacing(),this.getOrbits(),null,satellites);
         GroundNetwork groundNetwork=this.properties.getTradespaceSearch().getDesignSpace().getGroundNetworks().get(0);
         Architecture arch =new Architecture(constellation, groundNetwork);
         File mainPath = new File(System.getProperty("user.dir"), "problems");

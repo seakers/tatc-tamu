@@ -120,8 +120,8 @@ public class TATCTrain implements ArchitectureMethods {
                     satelliteFromTradespaceSearch.getPayload(),
                     orbit));
         }
-        Constellation constellation=new Constellation("DELTA_HOMOGENOUS",this.getOrbits().size(),
-                null,null,this.getOrbits(),
+        Constellation constellation=new Constellation(properties.getTradespaceSearch().getDesignSpace().getConstellations().get(0).getConstellationType(),
+                this.getOrbits().size(), null,null,this.getOrbits(),
                 constellationFromTradespaceSearch.getSatelliteInterval(),satellites);
         GroundNetwork groundNetwork=this.properties.getTradespaceSearch().getDesignSpace().getGroundNetworks().get(0);
         Architecture arch =new Architecture(constellation, groundNetwork);
