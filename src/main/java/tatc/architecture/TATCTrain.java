@@ -105,7 +105,7 @@ public class TATCTrain implements ArchitectureMethods {
     }
 
     @Override
-    public boolean toJSON(int counter) {
+    public File toJSON(int counter) {
         List<Satellite> satellites = new ArrayList<>();
         Satellite satelliteFromTradespaceSearch=this.properties.getTradespaceSearch().getDesignSpace().getSatellites().get(0);
         Constellation constellationFromTradespaceSearch=this.properties.getTradespaceSearch().getDesignSpace().getConstellations().get(0);
@@ -127,7 +127,8 @@ public class TATCTrain implements ArchitectureMethods {
         Architecture arch =new Architecture(constellation, groundNetwork);
         File mainPath = new File(System.getProperty("user.dir"), "problems");
         File file = new File (mainPath,"Architecture"+Integer.toString(counter)+".json");
-        return JSONIO.writeJSON(file,arch);
+        JSONIO.writeJSON(file,arch);
+        return file;
     }
 
 }

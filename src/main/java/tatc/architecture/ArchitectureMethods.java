@@ -4,5 +4,5 @@ import java.io.File;
 
 public interface ArchitectureMethods {
     
-    boolean toJSON(int counter);
+    File toJSON(int counter);
 }

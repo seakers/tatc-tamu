@@ -1,9 +1,14 @@
 package tatc.tradespaceiterator;
 
+import org.orekit.errors.OrekitException;
+import org.orekit.time.AbsoluteDate;
 import seakers.orekit.constellations.EnumerateConstellations;
 import seakers.orekit.constellations.TrainParameters;
 import seakers.orekit.constellations.WalkerParameters;
+import tatc.architecture.TATCTrain;
+import tatc.architecture.TATCWalker;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class TradespaceSearchStrategyFF implements TradespaceSearchStrategy {
@@ -38,11 +43,13 @@ public class TradespaceSearchStrategyFF implements TradespaceSearchStrategy {
 
         //TODO: change params to constellation
         for (WalkerParameters constellation : constellationParams) {
-            //TODO:
             // 1. From constellation, create a TATCWalker object
-            // 2. create the ArchitectureMethods JSON file using the method toJSON() from TATCWalker
-            // 3. Call TradespaceSearchExecutive.evaluate(JSONfile)
-
+            TATCWalker architecture = new TATCWalker(constellation.getA(),constellation.getI(),constellation.getT(),constellation.getP(),constellation.getF(),this.properties);
+            // 2. create the Architecture JSON file
+            File architectureJsonFile = architecture.toJSON(this.getCounter());
+            // 3. Evaluate architecture
+            TradespaceSearchExecutive.evaluateArchitecture(architectureJsonFile);
+            // increment the counter at each architecture evaluation
             this.incrementCounter();
         }
 
@@ -58,12 +65,20 @@ public class TradespaceSearchStrategyFF implements TradespaceSearchStrategy {
         ArrayList<TrainParameters> constellationParams=EnumerateConstellations.fullFactTrain(smaArray,((ProblemPropertiesTrain)properties).getLTANs());
 
         for (TrainParameters constellation : constellationParams) {
-            //TODO:
-            // 1. From constellation, create a TATCTrain object
-            // 2. create the ArchitectureMethods JSON file using the method toJSON() from TATCTrain
-            // 3. Call TradespaceSearchExecutive.evaluate(JSONfile)
 
-            this.incrementCounter();
+            try {
+                //TODO: figure out how to create the orekit ABsoluteDate from starDate epoch
+                // 1. From constellation, create a TATCTrain object
+                TATCTrain architecture = new TATCTrain(constellation.getA(),constellation.getLTANs(),new AbsoluteDate(),this.properties);
+                // 2. create the ArchitectureMethods JSON
+                File architectureJsonFile = architecture.toJSON(this.getCounter());
+                // 3. Evaluate architecture
+                TradespaceSearchExecutive.evaluateArchitecture(architectureJsonFile);
+                // increment the counter at each architecture evaluation
+                this.incrementCounter();
+            } catch (OrekitException e) {
+                e.printStackTrace();
+            }
         }
     }
 

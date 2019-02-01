@@ -29,9 +29,8 @@ public class TradespaceSearchExecutive {
         problem.start();
     }
     
-//    public outputs evaluateArchitecture(File architectureJSONFile) {
-//        return outputs;
-//    }
+    public static void evaluateArchitecture(File architectureJSONFile) {
+    }
 
     private TradespaceSearchStrategy createTradespaceSearchtrategy(TradespaceSearch tsr, ProblemProperties searchProperties) throws IllegalArgumentException {
         
