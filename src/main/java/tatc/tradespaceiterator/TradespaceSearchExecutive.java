@@ -17,7 +17,7 @@ public class TradespaceSearchExecutive {
 
         this.setDirectories();
 
-        TradespaceSearch tsr = JSONIO.readJSON( new File(System.getProperty("tatc.root"), "TradespaceSearch.json"),
+        TradespaceSearch tsr = JSONIO.readJSON( new File(System.getProperty("tatc.root"), "TradespaceSearch_modified.json"),
                 TradespaceSearch.class);
 
         Properties properties = new Properties();
@@ -33,7 +33,10 @@ public class TradespaceSearchExecutive {
     }
 
     private TradespaceSearchStrategy createTradespaceSearchtrategy(TradespaceSearch tsr, ProblemProperties searchProperties) throws IllegalArgumentException {
-        
+        if (tsr.getSettings().getSearchPreference()==null){
+            return new TradespaceSearchStrategyFF(searchProperties);
+        }
+
         switch (tsr.getSettings().getSearchPreference()) {
             case "FF":
                 return new TradespaceSearchStrategyFF(searchProperties);

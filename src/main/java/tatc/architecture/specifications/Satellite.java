@@ -1,5 +1,8 @@
 package tatc.architecture.specifications;
 
+import com.google.gson.annotations.JsonAdapter;
+import tatc.util.AlwaysListTypeAdapterFactory;
+
 import java.util.List;
 
 /**
@@ -16,6 +19,7 @@ public class Satellite {
     private final double volume;
     private final double power;
     private final List<String> commBand;
+    @JsonAdapter(AlwaysListTypeAdapterFactory.class)
     private final List<Instrument> payload;
     private final Orbit orbit;
 

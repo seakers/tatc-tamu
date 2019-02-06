@@ -1,5 +1,7 @@
 package tatc.architecture.specifications;
 
+import com.google.gson.internal.LinkedTreeMap;
+
 import java.util.ArrayList;
 
 /**
@@ -48,5 +50,21 @@ public class QuantitativeRange {
             values.add(value);
         }
         return values;
+    }
+
+    public static QuantitativeRange createQuantitativeRangeFromLinkedTreeMap(LinkedTreeMap map) throws IllegalArgumentException{
+        QuantitativeRange qr;
+        double minValue = (double)map.get("minValue");
+        double maxValue = (double)map.get("maxValue");
+        if (map.get("stepSize")!=null){
+            double stepSize = (double)map.get("stepSize");
+            qr = new QuantitativeRange(minValue,maxValue,stepSize,0);
+        }else if (map.get("numberSteps")!=null){
+            int numberSteps = (int)map.get("numberSteps");
+            qr = new QuantitativeRange(minValue,maxValue,0,numberSteps);
+        }else{
+            throw new IllegalArgumentException("QuantitativeRange must have either a step size or number of steps");
+        }
+        return qr;
     }
 }

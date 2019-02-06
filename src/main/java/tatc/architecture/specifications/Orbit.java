@@ -1,6 +1,10 @@
 package tatc.architecture.specifications;
 
 
+import com.google.gson.internal.LinkedTreeMap;
+
+import java.util.List;
+
 /**
  * Representation of an orbital trajectory about the Earth as a planetary body. Specific types include: Geosynchronous
  * (remains stationary above one location on the ground), sun synchronous (crosses the equator at the same local solar
@@ -44,10 +48,12 @@ public class Orbit {
     }
 
     public Object getAltitude() throws IllegalArgumentException{
-        if (altitude instanceof Double){
+        if (altitude instanceof Double) {
             return altitude;
-        }else if (altitude instanceof QuantitativeRange){
+        }else if (altitude instanceof List){
             return altitude;
+        }else if (altitude instanceof LinkedTreeMap && ((LinkedTreeMap) altitude).get("@type").equals("QuantitativeRange")){
+            return QuantitativeRange.createQuantitativeRangeFromLinkedTreeMap((LinkedTreeMap)altitude);
         }else {
             throw new IllegalArgumentException("Altitude has to be either a Double or a QuantitativeRange in TradespaceSearch.json");
         }
@@ -56,7 +62,9 @@ public class Orbit {
     public Class getAltitudeType() throws IllegalArgumentException{
         if (altitude instanceof Double){
             return Double.class;
-        }else if (altitude instanceof QuantitativeRange){
+        }else if (altitude instanceof List){
+            return List.class;
+        }else if (altitude instanceof LinkedTreeMap && ((LinkedTreeMap) altitude).get("@type").equals("QuantitativeRange")){
             return QuantitativeRange.class;
         }else {
             throw new IllegalArgumentException("Altitude has to be either a Double or a QuantitativeRange in TradespaceSearch.json");
@@ -72,8 +80,10 @@ public class Orbit {
             return inclination;
         }else if (inclination instanceof String){
             return inclination;
-        }else if (inclination instanceof QuantitativeRange){
+        }else if (inclination instanceof List){
             return inclination;
+        }else if (inclination instanceof LinkedTreeMap && ((LinkedTreeMap) inclination).get("@type").equals("QuantitativeRange")){
+            return QuantitativeRange.createQuantitativeRangeFromLinkedTreeMap((LinkedTreeMap)inclination);
         }else {
             throw new IllegalArgumentException("Inclination has to be either a Double, a String or a QuantitativeRange in TradespaceSearch.json");
         }
@@ -84,7 +94,9 @@ public class Orbit {
             return Double.class;
         }else if (inclination instanceof String){
             return String.class;
-        }else if (inclination instanceof QuantitativeRange){
+        }else if (inclination instanceof List){
+            return List.class;
+        }else if (inclination instanceof LinkedTreeMap && ((LinkedTreeMap) inclination).get("@type").equals("QuantitativeRange")){
             return QuantitativeRange.class;
         }else {
             throw new IllegalArgumentException("Inclination has to be either a Double, a String or a QuantitativeRange in TradespaceSearch.json");

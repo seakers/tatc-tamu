@@ -1,5 +1,13 @@
 package tatc.architecture.specifications;
 
+import com.google.gson.Gson;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.internal.LinkedTreeMap;
+import org.moeaframework.problem.misc.Lis;
+import tatc.util.AlwaysListTypeAdapterFactory;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,6 +27,7 @@ public class Constellation {
     private final Object relativeSpacing;
     // private final int relativeSpacing;
     // private final QuantitativeRange relativeSpacing;
+    @JsonAdapter(AlwaysListTypeAdapterFactory.class)
     private final List<Orbit> orbit;
     private final Object satelliteInterval;
     // private final double satelliteInterval;
@@ -40,19 +49,27 @@ public class Constellation {
     }
 
     public Object getNumberSatellites() throws IllegalArgumentException{
-        if (numberSatellites instanceof Integer){
-            return numberSatellites;
-        }else if (numberSatellites instanceof QuantitativeRange){
-            return numberSatellites;
+        if (numberSatellites instanceof Double) {
+            return ((Double) numberSatellites).intValue();
+        }else if (numberSatellites instanceof List){
+            ArrayList<Integer> nsat=new ArrayList<>();
+            for(Double d : (List<Double>)numberSatellites){
+                nsat.add(d.intValue());
+            }
+            return nsat;
+        }else if (numberSatellites instanceof LinkedTreeMap && ((LinkedTreeMap) numberSatellites).get("@type").equals("QuantitativeRange")){
+            return QuantitativeRange.createQuantitativeRangeFromLinkedTreeMap((LinkedTreeMap)numberSatellites);
         }else {
             throw new IllegalArgumentException("NumberSatellites has to be either an Integer or a QuantitativeRange in TradespaceSearch.json");
         }
     }
 
     public Class getNumberSatellitesType() throws IllegalArgumentException{
-        if (numberSatellites instanceof Integer){
+        if (numberSatellites instanceof Integer || numberSatellites instanceof Double){
             return Integer.class;
-        }else if (numberSatellites instanceof QuantitativeRange){
+        }else if (numberSatellites instanceof List){
+            return List.class;
+        }else if (numberSatellites instanceof LinkedTreeMap && ((LinkedTreeMap) numberSatellites).get("@type").equals("QuantitativeRange")){
             return QuantitativeRange.class;
         }else {
             throw new IllegalArgumentException("NumberSatellites has to be either an Integer or a QuantitativeRange in TradespaceSearch.json");
@@ -60,19 +77,27 @@ public class Constellation {
     }
 
     public Object getNumberPlanes() throws IllegalArgumentException{
-        if (numberPlanes instanceof Integer){
-            return numberPlanes;
-        }else if (numberPlanes instanceof QuantitativeRange){
-            return numberPlanes;
+        if (numberPlanes instanceof Double) {
+            return ((Double) numberPlanes).intValue();
+        }else if (numberPlanes instanceof List){
+            ArrayList<Integer> nplanes=new ArrayList<>();
+            for(Double d : (List<Double>)numberPlanes){
+                nplanes.add(d.intValue());
+            }
+            return nplanes;
+        }else if (numberPlanes instanceof LinkedTreeMap && ((LinkedTreeMap) numberPlanes).get("@type").equals("QuantitativeRange")){
+            return QuantitativeRange.createQuantitativeRangeFromLinkedTreeMap((LinkedTreeMap)numberPlanes);
         }else {
             throw new IllegalArgumentException("NumberPlanes has to be either an Integer or a QuantitativeRange in TradespaceSearch.json");
         }
     }
 
     public Class getNumberPlanesType() throws IllegalArgumentException{
-        if (numberPlanes instanceof Integer){
+        if (numberPlanes instanceof Integer || numberPlanes instanceof Double){
             return Integer.class;
-        }else if (numberPlanes instanceof QuantitativeRange){
+        }else if (numberPlanes instanceof List){
+            return List.class;
+        }else if (numberPlanes instanceof LinkedTreeMap && ((LinkedTreeMap) numberPlanes).get("@type").equals("QuantitativeRange")){
             return QuantitativeRange.class;
         }else {
             throw new IllegalArgumentException("NumberPlanes has to be either an Integer or a QuantitativeRange in TradespaceSearch.json");
@@ -80,19 +105,27 @@ public class Constellation {
     }
 
     public Object getRelativeSpacing() throws IllegalArgumentException{
-        if (relativeSpacing instanceof Integer){
-            return relativeSpacing;
-        }else if (relativeSpacing instanceof QuantitativeRange){
-            return relativeSpacing;
+        if (relativeSpacing instanceof Double) {
+            return ((Double) relativeSpacing).intValue();
+        }else if (relativeSpacing instanceof List){
+            ArrayList<Integer> relSpacing=new ArrayList<>();
+            for(Double d : (List<Double>)relativeSpacing){
+                relSpacing.add(d.intValue());
+            }
+            return relSpacing;
+        }else if (relativeSpacing instanceof LinkedTreeMap && ((LinkedTreeMap) relativeSpacing).get("@type").equals("QuantitativeRange")){
+            return QuantitativeRange.createQuantitativeRangeFromLinkedTreeMap((LinkedTreeMap)relativeSpacing);
         }else {
             throw new IllegalArgumentException("RelativeSpacing has to be either an Integer or a QuantitativeRange in TradespaceSearch.json");
         }
     }
 
     public Class getRelativeSpacingType() throws IllegalArgumentException{
-        if (relativeSpacing instanceof Integer){
+        if (relativeSpacing instanceof Integer || relativeSpacing instanceof Double){
             return Integer.class;
-        }else if (relativeSpacing instanceof QuantitativeRange){
+        }else if (relativeSpacing instanceof List){
+            return List.class;
+        }else if (relativeSpacing instanceof LinkedTreeMap && ((LinkedTreeMap) relativeSpacing).get("@type").equals("QuantitativeRange")){
             return QuantitativeRange.class;
         }else {
             throw new IllegalArgumentException("RelativeSpacing has to be either an Integer or a QuantitativeRange in TradespaceSearch.json");

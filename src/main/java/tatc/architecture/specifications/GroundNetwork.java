@@ -1,5 +1,7 @@
 package tatc.architecture.specifications;
 
+import com.google.gson.internal.LinkedTreeMap;
+
 /**
  * A network of ground stations providing uplink and downlink connectivity for a mission.
  * Used by: ArchitectureConstraints, ArchitectureMethods
@@ -35,19 +37,21 @@ public class GroundNetwork {
     }
 
     public Object getNumberStations() throws IllegalArgumentException{
-        if (numberStations instanceof Integer){
+        if (numberStations instanceof Integer) {
             return numberStations;
-        }else if (numberStations instanceof QuantitativeRange){
-            return numberStations;
+        }else if (numberStations instanceof Double){
+            return ((Double) numberStations).intValue();
+        }else if (numberStations instanceof LinkedTreeMap && ((LinkedTreeMap) numberStations).get("@type").equals("QuantitativeRange")){
+            return QuantitativeRange.createQuantitativeRangeFromLinkedTreeMap((LinkedTreeMap)numberStations);
         }else {
             throw new IllegalArgumentException("NumberStations has to be either an Integer or a QuantitativeRange in TradespaceSearch.json");
         }
     }
 
     public Class getNumberStationsType() throws IllegalArgumentException{
-        if (numberStations instanceof Integer){
+        if (numberStations instanceof Integer || numberStations instanceof Double){
             return Integer.class;
-        }else if (numberStations instanceof QuantitativeRange){
+        }else if (numberStations instanceof LinkedTreeMap && ((LinkedTreeMap) numberStations).get("@type").equals("QuantitativeRange")){
             return QuantitativeRange.class;
         }else {
             throw new IllegalArgumentException("NumberStations has to be either an Integer or a QuantitativeRange in TradespaceSearch.json");

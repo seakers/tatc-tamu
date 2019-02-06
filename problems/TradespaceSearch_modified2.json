@@ -102,14 +102,8 @@
           "inclination": 98.20807124037059
         }, 
         "@type": "Constellation", 
-        "numberSatellites": [
-          1, 
-          2
-        ], 
-        "numberPlanes": [
-          1, 
-          2
-        ]
+        "numberSatellites": 2, 
+        "numberPlanes": 1
       }
     ]
   }, 
