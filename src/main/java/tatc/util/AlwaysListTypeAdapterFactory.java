@@ -40,7 +40,7 @@ final public class AlwaysListTypeAdapterFactory<E> implements TypeAdapterFactory
 
     private static Type resolveTypeArgument(final Type type) {
         // The given type is not parameterized?
-        if ( !(type instanceof ParameterizedType) ) {gi
+        if ( !(type instanceof ParameterizedType) ) {
             // No, raw
             return Object.class;
         }
