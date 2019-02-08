@@ -33,14 +33,14 @@ final public class AlwaysListTypeAdapterFactory<E> implements TypeAdapterFactory
         final TypeAdapter<E> elementTypeAdapter = (TypeAdapter<E>) gson.getAdapter(TypeToken.get(elementType));
         // Note that the always-list type adapter is made null-safe, so we don't have to check nulls ourselves
         @SuppressWarnings("unchecked")
-        TypeAdapter<List<E>> defaultListAdapter = gson.getDelegateAdapter(this, (TypeToken<List<E>>) TypeToken.getParameterized(List.class, elementType));
+        final TypeAdapter<List<E>> defaultListAdapter = gson.getAdapter((TypeToken<List<E>>) TypeToken.getParameterized(List.class, elementType));
         final TypeAdapter<T> alwaysListTypeAdapter = (TypeAdapter<T>) new AlwaysListTypeAdapter<>(elementTypeAdapter, defaultListAdapter).nullSafe();
         return alwaysListTypeAdapter;
     }
 
     private static Type resolveTypeArgument(final Type type) {
         // The given type is not parameterized?
-        if ( !(type instanceof ParameterizedType) ) {
+        if ( !(type instanceof ParameterizedType) ) {gi
             // No, raw
             return Object.class;
         }
@@ -52,7 +52,7 @@ final public class AlwaysListTypeAdapterFactory<E> implements TypeAdapterFactory
             extends TypeAdapter<List<E>> {
 
         private final TypeAdapter<E> elementTypeAdapter;
-        TypeAdapter<List<E>> defaultListAdapter;
+        private final TypeAdapter<List<E>> defaultListAdapter;
 
         private AlwaysListTypeAdapter(final TypeAdapter<E> elementTypeAdapter, TypeAdapter<List<E>> defaultListAdapter) {
             this.elementTypeAdapter = elementTypeAdapter;

@@ -134,7 +134,12 @@ public class TATCWalker implements ArchitectureMethods{
         Constellation constellation=new Constellation(constellationFromTradespaceSearch.getConstellationType(),
                 this.getNumberSatellites(),this.getNumberPlanes(),this.getRelativeSpacing(),this.getOrbits(),null,satellites);
         GroundNetwork groundNetwork=this.properties.getTradespaceSearch().getDesignSpace().getGroundNetworks().get(0);
-        Architecture arch =new Architecture(constellation, groundNetwork);
+        GroundNetwork groundNetworkWithGroundStations = new GroundNetwork(groundNetwork.getName(),
+                                                                        groundNetwork.getAcronym(),
+                                                                        groundNetwork.getAgency(),
+                                                                        groundNetwork.getNumberStations(),
+                                                                        this.properties.getTradespaceSearch().getDesignSpace().getGroundStations());
+        Architecture arch =new Architecture(constellation, groundNetworkWithGroundStations);
         File mainPath = new File(System.getProperty("user.dir"), "problems");
         File file = new File (mainPath,"Architecture"+Integer.toString(counter)+".json");
         JSONIO.writeJSON(file,arch);

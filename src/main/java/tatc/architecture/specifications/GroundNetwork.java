@@ -2,6 +2,8 @@ package tatc.architecture.specifications;
 
 import com.google.gson.internal.LinkedTreeMap;
 
+import java.util.List;
+
 /**
  * A network of ground stations providing uplink and downlink connectivity for a mission.
  * Used by: ArchitectureConstraints, ArchitectureMethods
@@ -14,14 +16,14 @@ public class GroundNetwork {
     private final Object numberStations;
     // private final int numberStations;
     // private final QuantitativeRange numberStations;
-    private final GroundStation groundStation;
+    private final List<GroundStation> groundStations;
 
-    public GroundNetwork(String name, String acronym, Agency agency, Object numberStations, GroundStation groundStation) {
+    public GroundNetwork(String name, String acronym, Agency agency, Object numberStations, List<GroundStation> groundStations) {
         this.name = name;
         this.acronym = acronym;
         this.agency = agency;
         this.numberStations = numberStations;
-        this.groundStation = groundStation;
+        this.groundStations = groundStations;
     }
 
     public String getName() {
@@ -58,7 +60,7 @@ public class GroundNetwork {
         }
     }
 
-    public GroundStation getGroundStation() {
-        return groundStation;
+    public List<GroundStation> getGroundStations() {
+        return groundStations;
     }
 }
