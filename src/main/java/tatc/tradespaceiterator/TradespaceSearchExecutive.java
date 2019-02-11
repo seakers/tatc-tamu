@@ -17,7 +17,7 @@ public class TradespaceSearchExecutive {
 
         this.setDirectories();
 
-        TradespaceSearch tsr = JSONIO.readJSON( new File(System.getProperty("tatc.root"), "TradespaceSearch_modified.json"),
+        TradespaceSearch tsr = JSONIO.readJSON( new File(System.getProperty("tatc.root"), "TradespaceSearch.json"),
                 TradespaceSearch.class);
 
         Properties properties = new Properties();
