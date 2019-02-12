@@ -1,11 +1,15 @@
 package tatc.architecture.specifications;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Configuration options specific to TAT-C outputs.
  * Used by: TradespaceSearch
  */
 public class AnalysisSettings {
 
+    @SerializedName("@type")
+    private final String _type="AnalysisSettings";
     private final int propagationFidelity;
     private final boolean includePropulsion;
     private final Outputs outputs;

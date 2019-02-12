@@ -1,5 +1,7 @@
 package tatc.architecture.specifications;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 /**
@@ -8,6 +10,9 @@ import java.util.List;
  */
 
 public class MissionConcept {
+
+    @SerializedName("@type")
+    private final String _type="MissionConcept";
     private final String name;
     private final String acronym;
     private final Agency agency;

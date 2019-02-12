@@ -1,5 +1,6 @@
 package tatc.architecture.specifications;
 
+import com.google.gson.annotations.SerializedName;
 import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.List;
@@ -10,6 +11,8 @@ import java.util.List;
  */
 public class GroundNetwork {
 
+    @SerializedName("@type")
+    private final String _type="GroundNetwork";
     private final String name;
     private final String acronym;
     private final Agency agency;

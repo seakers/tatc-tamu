@@ -1,11 +1,15 @@
 package tatc.architecture.specifications;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Configuration options to filter the output of TAT-C based on ranges of parameters such as time bounds, lat/long regions, and mission performance.
  * Used by: AnalysisSettings
  */
 public class OutputBounds {
 
+    @SerializedName("@type")
+    private final String _type="OutputBounds";
     private final QuantitativeValue outputTimeAfterStart;
     private final QuantitativeValue outputTimeToCoverage;
     private final QuantitativeValue outputAccessTime;

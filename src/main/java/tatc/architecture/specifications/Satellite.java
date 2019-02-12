@@ -1,6 +1,7 @@
 package tatc.architecture.specifications;
 
 import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
 import tatc.util.AlwaysListTypeAdapterFactory;
 
 import java.util.List;
@@ -12,6 +13,8 @@ import java.util.List;
 
 public class Satellite {
 
+    @SerializedName("@type")
+    private final String _type="Satellite";
     private final String name;
     private final String acronym;
     private final Agency agency;

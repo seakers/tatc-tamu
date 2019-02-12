@@ -1,11 +1,15 @@
 package tatc.architecture.specifications;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * A variable to be maximized or minimized to achieve mission objectives.
  * Used by: MissionConcept
  */
 public class MissionObjective {
 
+    @SerializedName("@type")
+    private final String _type="MissionObjective";
     private final String name;
     private final String parent;
     private final double weight;

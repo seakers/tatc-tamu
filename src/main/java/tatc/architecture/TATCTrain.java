@@ -12,6 +12,7 @@ import tatc.tradespaceiterator.ProblemProperties;
 import tatc.util.JSONIO;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -133,6 +134,11 @@ public class TATCTrain implements ArchitectureMethods {
         File mainPath = new File(System.getProperty("user.dir"), "problems");
         File file = new File (mainPath,"Architecture"+Integer.toString(counter)+".json");
         JSONIO.writeJSON(file,arch);
+        try {
+            JSONIO.replaceTypeFieldUnderscore(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return file;
     }
 

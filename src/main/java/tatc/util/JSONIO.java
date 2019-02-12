@@ -7,13 +7,8 @@ package tatc.util;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+
+import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -60,5 +55,26 @@ public class JSONIO {
             return false;
         }
         return true;
+    }
+
+    public static void replaceTypeFieldUnderscore(File file) throws IOException {
+
+        File tempFile = File.createTempFile("buffer", ".tmp");
+        FileWriter fw = new FileWriter(tempFile);
+
+        Reader fr = new FileReader(file);
+        BufferedReader br = new BufferedReader(fr);
+
+        while(br.ready()) {
+            fw.write(br.readLine().replaceAll("_type", "@type") + "\n");
+        }
+
+        fw.close();
+        br.close();
+        fr.close();
+        file.delete();
+
+        // Finally replace the original file.
+        boolean success = tempFile.renameTo(file);
     }
 }

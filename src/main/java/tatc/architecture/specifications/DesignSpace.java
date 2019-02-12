@@ -1,5 +1,7 @@
 package tatc.architecture.specifications;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 /**
@@ -8,6 +10,8 @@ import java.util.List;
  */
 public class DesignSpace {
 
+    @SerializedName("@type")
+    private final String _type="DesignSpace";
     private final List<Constellation> constellations;
     private final List<LaunchVehicle> launchers;
     private final List<Satellite> satellites;

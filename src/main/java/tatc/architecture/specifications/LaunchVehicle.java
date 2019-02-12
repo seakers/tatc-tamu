@@ -1,5 +1,7 @@
 package tatc.architecture.specifications;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * An entity that delivers satellites to orbit.
  * Used by: ArchitectureConstraints, Satellite
@@ -7,6 +9,8 @@ package tatc.architecture.specifications;
 
 public class LaunchVehicle {
 
+    @SerializedName("@type")
+    private final String _type="LaunchVehicle";
     private final String name;
     private final String acronym;
     private final Agency agency;

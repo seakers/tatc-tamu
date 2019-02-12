@@ -1,5 +1,6 @@
 package tatc.architecture.specifications;
 
+import com.google.gson.annotations.SerializedName;
 import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.ArrayList;
@@ -11,6 +12,8 @@ import java.util.ArrayList;
  */
 public class QuantitativeRange {
 
+    @SerializedName("@type")
+    private final String _type="QuantitativeRange";
     private final double minValue;
     private final double maxValue;
     private final double stepSize;

@@ -1,5 +1,7 @@
 package tatc.architecture.specifications;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * A region or point designated by bounding latitudes and longitudes.
  * Used by: MissionConcept
@@ -7,6 +9,8 @@ package tatc.architecture.specifications;
 
 public class Region {
 
+    @SerializedName("@type")
+    private final String _type="Region";
     private final QuantitativeValue latitude;
     private final QuantitativeValue longitude;
 

@@ -1,5 +1,7 @@
 package tatc.architecture.specifications;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 
 /**
@@ -8,6 +10,8 @@ import java.util.ArrayList;
  */
 public class SearchParameters {
 
+    @SerializedName("@type")
+    private final String _type="SearchParameters";
     private final int maxNFE;
     private final int populationSize;
     private final ArrayList<Double> epsilons;

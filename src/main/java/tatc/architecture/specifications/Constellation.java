@@ -2,6 +2,7 @@ package tatc.architecture.specifications;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
 import com.google.gson.internal.LinkedTreeMap;
 import org.moeaframework.problem.misc.Lis;
 import tatc.util.AlwaysListTypeAdapterFactory;
@@ -17,6 +18,8 @@ import java.util.List;
  */
 public class Constellation {
 
+    @SerializedName("@type")
+    private final String _type="Constellation";
     private final String constellationType;
     private final Object numberSatellites;
     // private final int numberSatellites;

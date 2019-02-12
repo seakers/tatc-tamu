@@ -1,6 +1,7 @@
 package tatc.architecture.specifications;
 
 
+import com.google.gson.annotations.SerializedName;
 import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.List;
@@ -14,6 +15,8 @@ import java.util.List;
  */
 public class Orbit {
 
+    @SerializedName("@type")
+    private final String _type="Orbit";
     private final String orbitType;
     private final Object altitude;
     // private final double altitude;
