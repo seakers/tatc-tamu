@@ -14,10 +14,10 @@ public class QuantitativeRange {
 
     @SerializedName("@type")
     private final String _type="QuantitativeRange";
-    private final double minValue;
-    private final double maxValue;
-    private final double stepSize;
-    private final int numberSteps;
+    private final Double minValue;
+    private final Double maxValue;
+    private final Double stepSize;
+    private final Integer numberSteps;
 
     public QuantitativeRange(double minValue, double maxValue, double stepSize, int numberSteps) {
         this.minValue = minValue;

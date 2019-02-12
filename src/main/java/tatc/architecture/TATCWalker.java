@@ -133,7 +133,7 @@ public class TATCWalker implements ArchitectureMethods{
                     orbit));
         }
         Constellation constellation=new Constellation(constellationFromTradespaceSearch.getConstellationType(),
-                this.getNumberSatellites(),this.getNumberPlanes(),this.getRelativeSpacing(),this.getOrbits(),null,satellites);
+                this.getNumberSatellites(),this.getNumberPlanes(),this.getRelativeSpacing(),constellationFromTradespaceSearch.getOrbit(),null,satellites);
         GroundNetwork groundNetwork=this.properties.getTradespaceSearch().getDesignSpace().getGroundNetworks().get(0);
         GroundNetwork groundNetworkWithGroundStations = new GroundNetwork(groundNetwork.getName(),
                                                                         groundNetwork.getAcronym(),

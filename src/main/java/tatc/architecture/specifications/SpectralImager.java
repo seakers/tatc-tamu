@@ -15,21 +15,21 @@ public class SpectralImager {
     private final String name;
     private final String acronym;
     private final Agency agency;
-    private final double mass;
-    private final double volume;
-    private final double power;
+    private final Double mass;
+    private final Double volume;
+    private final Double power;
     private final List<Double> operatingWavelength;
-    private final int pixelBitDepth;
-    private final double fieldOfView;
+    private final Integer pixelBitDepth;
+    private final Double fieldOfView;
     private final String fieldOfViewShape;
-    private final int numberPixels;
-    private final double dataRate;
+    private final Integer numberPixels;
+    private final Double dataRate;
     private final String solarConditions;
     private final Object orientation;
     // private final double orientation;
     // private final String orientation;
-    private final double minSignalNoiseRatio;
-    private final double detectiveQuantumEfficiency;
+    private final Double minSignalNoiseRatio;
+    private final Double detectiveQuantumEfficiency;
 
     public SpectralImager(String name, String acronym, Agency agency, double mass, double volume, double power, List<Double> operatingWavelength, int pixelBitDepth, double fieldOfView, String fieldOfViewShape, int numberPixels, double dataRate, String solarConditions, Object orientation, double minSignalNoiseRatio, double detectiveQuantumEfficiency) {
         this.name = name;

@@ -10,7 +10,7 @@ public class AnalysisSettings {
 
     @SerializedName("@type")
     private final String _type="AnalysisSettings";
-    private final int propagationFidelity;
+    private final Integer propagationFidelity;
     private final boolean includePropulsion;
     private final Outputs outputs;
     private final OutputBounds outputBounds;

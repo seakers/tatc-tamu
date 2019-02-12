@@ -12,9 +12,9 @@ public class MissionObjective {
     private final String _type="MissionObjective";
     private final String name;
     private final String parent;
-    private final double weight;
+    private final Double weight;
     private final String type;
-    private final double target;
+    private final Double target;
 
     public MissionObjective(String name, String parent, double weight, String type, double target) {
         this.name = name;

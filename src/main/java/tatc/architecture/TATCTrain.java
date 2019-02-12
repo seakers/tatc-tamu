@@ -122,7 +122,7 @@ public class TATCTrain implements ArchitectureMethods {
                     orbit));
         }
         Constellation constellation=new Constellation(constellationFromTradespaceSearch.getConstellationType(),
-                this.getOrbits().size(), null,null,this.getOrbits(),
+                this.getOrbits().size(), null,null,constellationFromTradespaceSearch.getOrbit(),
                 constellationFromTradespaceSearch.getSatelliteInterval(),satellites);
         GroundNetwork groundNetwork=this.properties.getTradespaceSearch().getDesignSpace().getGroundNetworks().get(0);
         GroundNetwork groundNetworkWithGroundStations = new GroundNetwork(groundNetwork.getName(),

@@ -15,14 +15,14 @@ public class Instrument {
     private final String name;
     private final String acronym;
     private final Agency agency;
-    private final double mass;
-    private final double volume;
-    private final double power;
+    private final Double mass;
+    private final Double volume;
+    private final Double power;
     private final List<Double> operatingWavelength;
-    private final int pixelBitDepth;
-    private final double fieldOfView;
-    private final int numberPixels;
-    private final double dataRate;
+    private final Integer pixelBitDepth;
+    private final Double fieldOfView;
+    private final Integer numberPixels;
+    private final Double dataRate;
     private final String solarConditions;
 
     public Instrument(String name, String acronym, Agency agency, double mass, double volume, double power, List<Double> operatingWavelength, int pixelBitDepth, double fieldOfView, int numberPixels, double dataRate, String solarConditions) {

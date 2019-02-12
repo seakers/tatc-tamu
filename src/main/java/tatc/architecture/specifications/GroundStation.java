@@ -15,9 +15,9 @@ public class GroundStation {
     private final String name;
     private final String acronym;
     private final Agency agency;
-    private final double latitude;
-    private final double longitude;
-    private final double elevation;
+    private final Double latitude;
+    private final Double longitude;
+    private final Double elevation;
     private final List<String> commBand;
 
     public GroundStation(String name, String acronym, Agency agency, double latitude, double longitude, double elevation, List<String> commBand) {

@@ -18,9 +18,9 @@ public class Satellite {
     private final String name;
     private final String acronym;
     private final Agency agency;
-    private final double mass;
-    private final double volume;
-    private final double power;
+    private final Double mass;
+    private final Double volume;
+    private final Double power;
     private final List<String> commBand;
     @JsonAdapter(AlwaysListTypeAdapterFactory.class)
     private final List<Instrument> payload;

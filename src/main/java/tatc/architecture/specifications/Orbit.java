@@ -21,15 +21,15 @@ public class Orbit {
     private final Object altitude;
     // private final double altitude;
     // private final QuantitativeRange altitude;
-    private final double semimajorAxis;
+    private final Double semimajorAxis;
     private final Object inclination;
     // private final double inclinations;
     // private final String inclinations;
     // private final QuantitativeRange inclinations;
-    private final double eccentricity;
-    private final double periapsisArgument;
-    private final double rightAscensionAscendingNode;
-    private final double trueAnomaly;
+    private final Double eccentricity;
+    private final Double periapsisArgument;
+    private final Double rightAscensionAscendingNode;
+    private final Double trueAnomaly;
     private final String epoch;
     private final String localSolarTimeAscendingNode;
 

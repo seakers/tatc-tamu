@@ -12,19 +12,19 @@ public class SearchParameters {
 
     @SerializedName("@type")
     private final String _type="SearchParameters";
-    private final int maxNFE;
-    private final int populationSize;
+    private final Integer maxNFE;
+    private final Integer populationSize;
     private final ArrayList<Double> epsilons;
-    private final int sizeTournament;
-    private final double pCrossover;
-    private final double pMutation;
-    private final double alpha;
-    private final double beta;
-    private final double pmin;
+    private final Integer sizeTournament;
+    private final Double pCrossover;
+    private final Double pMutation;
+    private final Double alpha;
+    private final Double beta;
+    private final Double pmin;
     private final String iOperators;
     private final String dOperators;
-    private final int NFEtriggerDM;
-    private final int nOperRepl;
+    private final Integer NFEtriggerDM;
+    private final Integer nOperRepl;
 
     public SearchParameters(int maxNFE, int populationSize, ArrayList<Double> epsilons, int sizeTournament, double pCrossover, double pMutation, double alpha, double beta, double pmin, String iOperators, String dOperators, int NFEtriggerDM, int nOperRepl) {
         this.maxNFE = maxNFE;

@@ -6,8 +6,8 @@ public class QuantitativeValue {
 
     @SerializedName("@type")
     private final String _type="QuantitativeValue";
-    private final double minValue;
-    private final double maxValue;
+    private final Double minValue;
+    private final Double maxValue;
 
     public QuantitativeValue(double minValue, double maxValue) {
         this.minValue = minValue;
