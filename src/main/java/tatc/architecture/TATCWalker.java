@@ -83,8 +83,8 @@ public class TATCWalker implements ArchitectureMethods{
             for (int satNum = 0; satNum < s; satNum++) {
                 Orbit orbit = new Orbit("KEPLERIAN",null,
                         semimajoraxis,inclination,0.0,0.0,
-                        refRaan + planeNum * delRaan,
-                        (refAnom + satNum * delAnom + phasing * planeNum) % (2. * FastMath.PI), null, null);
+                        FastMath.toDegrees(refRaan + planeNum * delRaan),
+                        FastMath.toDegrees((refAnom + satNum * delAnom + phasing * planeNum) % (2. * FastMath.PI)), null, null);
                 this.orbits.add(orbit);
             }
         }
