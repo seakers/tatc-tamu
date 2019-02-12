@@ -24,11 +24,11 @@ public class ProblemPropertiesTrain implements ProblemProperties{
             ArrayList<Double> altitudesDiscrete= altitudes.discretize();
             this.smas = new ArrayList<>();
             for (Double alt : altitudesDiscrete){
-                this.smas.add(Constants.WGS84_EARTH_EQUATORIAL_RADIUS + alt);
+                this.smas.add(Constants.WGS84_EARTH_EQUATORIAL_RADIUS/1000 + alt);
             }
         } else{
             this.smas=new ArrayList<>();
-            this.smas.add(Constants.WGS84_EARTH_EQUATORIAL_RADIUS + (Double)orbits.getAltitude());
+            this.smas.add(Constants.WGS84_EARTH_EQUATORIAL_RADIUS/1000 + (Double)orbits.getAltitude());
         }
 
         LTANs=new ArrayList<>();

@@ -130,7 +130,11 @@ public class TATCTrain implements ArchitectureMethods {
                 groundNetwork.getAgency(),
                 groundNetwork.getNumberStations(),
                 this.properties.getTradespaceSearch().getDesignSpace().getGroundStations());
-        Architecture arch =new Architecture(constellation, groundNetworkWithGroundStations);
+        List<Constellation> constellations = new ArrayList<>();
+        constellations.add(constellation);
+        List<GroundNetwork> groundNetworksWithGroundStations = new ArrayList<>();
+        groundNetworksWithGroundStations.add(groundNetworkWithGroundStations);
+        Architecture arch =new Architecture(constellations, groundNetworksWithGroundStations);
         File mainPath = new File(System.getProperty("user.dir"), "problems");
         File file = new File (mainPath,"Architecture"+Integer.toString(counter)+".json");
         JSONIO.writeJSON(file,arch);

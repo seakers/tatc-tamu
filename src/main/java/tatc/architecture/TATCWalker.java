@@ -81,12 +81,10 @@ public class TATCWalker implements ArchitectureMethods{
         this.orbits = new ArrayList<>();
         for (int planeNum = 0; planeNum < p; planeNum++) {
             for (int satNum = 0; satNum < s; satNum++) {
-                Orbit orbit = new Orbit("KEPLERIAN",semimajoraxis - Constants.WGS84_EARTH_EQUATORIAL_RADIUS,
+                Orbit orbit = new Orbit("KEPLERIAN",null,
                         semimajoraxis,inclination,0.0,0.0,
                         refRaan + planeNum * delRaan,
-                        (refAnom + satNum * delAnom + phasing * planeNum) % (2. * FastMath.PI),
-                        properties.getTradespaceSearch().getMission().getStart(),
-                        "");
+                        (refAnom + satNum * delAnom + phasing * planeNum) % (2. * FastMath.PI), null, null);
                 this.orbits.add(orbit);
             }
         }
@@ -140,7 +138,11 @@ public class TATCWalker implements ArchitectureMethods{
                                                                         groundNetwork.getAgency(),
                                                                         groundNetwork.getNumberStations(),
                                                                         this.properties.getTradespaceSearch().getDesignSpace().getGroundStations());
-        Architecture arch =new Architecture(constellation, groundNetworkWithGroundStations);
+        List<Constellation> constellations = new ArrayList<>();
+        constellations.add(constellation);
+        List<GroundNetwork> groundNetworksWithGroundStations = new ArrayList<>();
+        groundNetworksWithGroundStations.add(groundNetworkWithGroundStations);
+        Architecture arch =new Architecture(constellations, groundNetworksWithGroundStations);
         File mainPath = new File(System.getProperty("user.dir"), "problems");
         File file = new File (mainPath,"Architecture"+Integer.toString(counter)+".json");
         JSONIO.writeJSON(file,arch);
