@@ -23,9 +23,6 @@ public class LaunchVehicle {
     private final Double reliability;
     private final Double cost;
     private final Object meanTimeBetweenLaunches;
-    // private final double meanTimeBetweenLaunches;
-    // private final String meanTimeBetweenLaunches;
-
 
     public LaunchVehicle(String name, String acronym, Agency agency, double payloadMass, double payloadVolume, double dryMass, double propellantMass, double specificImpulse, double massToLEO, double reliability, double cost, Object meanTimeBetweenLaunches) {
         this.name = name;

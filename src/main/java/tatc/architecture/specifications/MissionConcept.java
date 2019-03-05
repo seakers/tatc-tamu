@@ -1,6 +1,8 @@
 package tatc.architecture.specifications;
 
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
+import tatc.util.AlwaysListTypeAdapterFactory;
 
 import java.util.List;
 
@@ -19,13 +21,12 @@ public class MissionConcept {
     private final String start;
     private final String end;
     private final Object duration;
-    // private final String duration;
-    // private final double duration;
-    private final Region target;
+    @JsonAdapter(AlwaysListTypeAdapterFactory.class)
+    private final List<Region> target;
     private final List<String> objects;
     private final List<MissionObjective> objectives;
 
-    public MissionConcept(String name, String acronym, Agency agency, String start, String end, Object duration, Region target, List<String> objects, List<MissionObjective> objectives) {
+    public MissionConcept(String name, String acronym, Agency agency, String start, String end, Object duration, List<Region> target, List<String> objects, List<MissionObjective> objectives) {
         this.name = name;
         this.acronym = acronym;
         this.agency = agency;
@@ -77,7 +78,7 @@ public class MissionConcept {
         }
     }
 
-    public Region getTarget() {
+    public List<Region> getTarget() {
         return target;
     }
 

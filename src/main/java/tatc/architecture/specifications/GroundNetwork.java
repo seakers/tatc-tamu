@@ -3,6 +3,7 @@ package tatc.architecture.specifications;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.internal.LinkedTreeMap;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,8 +18,6 @@ public class GroundNetwork {
     private final String acronym;
     private final Agency agency;
     private final Object numberStations;
-    // private final int numberStations;
-    // private final QuantitativeRange numberStations;
     private final List<GroundStation> groundStations;
 
     public GroundNetwork(String name, String acronym, Agency agency, Object numberStations, List<GroundStation> groundStations) {
@@ -46,6 +45,12 @@ public class GroundNetwork {
             return numberStations;
         }else if (numberStations instanceof Double){
             return ((Double) numberStations).intValue();
+        }else if (numberStations instanceof List){
+            ArrayList<Integer> nstations=new ArrayList<>();
+            for(Double d : (List<Double>)numberStations){
+                nstations.add(d.intValue());
+            }
+            return nstations;
         }else if (numberStations instanceof LinkedTreeMap && ((LinkedTreeMap) numberStations).get("@type").equals("QuantitativeRange")){
             return QuantitativeRange.createQuantitativeRangeFromLinkedTreeMap((LinkedTreeMap)numberStations);
         }else {
@@ -56,6 +61,8 @@ public class GroundNetwork {
     public Class getNumberStationsType() throws IllegalArgumentException{
         if (numberStations instanceof Integer || numberStations instanceof Double){
             return Integer.class;
+        }else if (numberStations instanceof List){
+            return List.class;
         }else if (numberStations instanceof LinkedTreeMap && ((LinkedTreeMap) numberStations).get("@type").equals("QuantitativeRange")){
             return QuantitativeRange.class;
         }else {

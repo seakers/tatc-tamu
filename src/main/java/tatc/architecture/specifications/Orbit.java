@@ -19,13 +19,8 @@ public class Orbit {
     private final String _type="Orbit";
     private final String orbitType;
     private final Object altitude;
-    // private final double altitude;
-    // private final QuantitativeRange altitude;
     private final Double semimajorAxis;
     private final Object inclination;
-    // private final double inclinations;
-    // private final String inclinations;
-    // private final QuantitativeRange inclinations;
     private final Double eccentricity;
     private final Double periapsisArgument;
     private final Double rightAscensionAscendingNode;

@@ -30,6 +30,7 @@ public class TradespaceSearchExecutive {
     }
     
     public static void evaluateArchitecture(File architectureJSONFile) {
+        //make python call: python arch_eval.py arch_file arch_dir
     }
 
     private TradespaceSearchStrategy createTradespaceSearchtrategy(TradespaceSearch tsr, ProblemProperties searchProperties) throws IllegalArgumentException {

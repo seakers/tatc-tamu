@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hipparchus.util.FastMath;
-import org.orekit.utils.Constants;
 import tatc.architecture.specifications.*;
 import tatc.tradespaceiterator.ProblemProperties;
 import tatc.util.JSONIO;
@@ -36,6 +35,10 @@ public class TATCWalker implements ArchitectureMethods{
 
     private final int relativeSpacing;
 
+    private final Satellite satellite;
+
+    private final GroundNetwork groundNetwork;
+
     /**
      * Creates a walker delta-pattern constellation in the specified Walker
      * configuration at the specified semi-major axis. The satellites contained
@@ -43,13 +46,15 @@ public class TATCWalker implements ArchitectureMethods{
      * steering/attitude laws. Can specify where the reference raan and true
      * anomaly to orient the walker configuration
      */
-    public TATCWalker(double semimajoraxis, double inc, int t, int p, int f, ProblemProperties props) {
+    public TATCWalker(double semimajoraxis, double inc, int t, int p, int f, Satellite satellite, GroundNetwork groundNetwork,ProblemProperties props) {
 
         this.semimajoraxis=semimajoraxis;
         this.inclination=inc;
         this.numberSatellites=t;
         this.numberPlanes=p;
         this.relativeSpacing=f;
+        this.satellite=satellite;
+        this.groundNetwork=groundNetwork;
         this.properties=props;
 
         //checks for valid parameters
@@ -117,34 +122,29 @@ public class TATCWalker implements ArchitectureMethods{
     @Override
     public File toJSON(int counter) {
         List<Satellite> satellites = new ArrayList<>();
-        Constellation constellationFromTradespaceSearch=this.properties.getTradespaceSearch().getDesignSpace().getConstellations().get(0);
-        Satellite satelliteFromTradespaceSearch=this.properties.getTradespaceSearch().getDesignSpace().getSatellites().get(0);
+
         for (Orbit orbit : this.getOrbits()){
-            satellites.add(new Satellite(satelliteFromTradespaceSearch.getName(),
-                    satelliteFromTradespaceSearch.getAcronym(),
-                    satelliteFromTradespaceSearch.getAgency(),
-                    satelliteFromTradespaceSearch.getMass(),
-                    satelliteFromTradespaceSearch.getVolume(),
-                    satelliteFromTradespaceSearch.getPower(),
-                    satelliteFromTradespaceSearch.getCommBand(),
-                    satelliteFromTradespaceSearch.getPayload(),
+            satellites.add(new Satellite(this.satellite.getName(),
+                    this.satellite.getAcronym(),
+                    this.satellite.getAgency(),
+                    this.satellite.getMass(),
+                    this.satellite.getVolume(),
+                    this.satellite.getPower(),
+                    this.satellite.getCommBand(),
+                    this.satellite.getPayload(),
                     orbit));
         }
-        Constellation constellation=new Constellation(constellationFromTradespaceSearch.getConstellationType(),
-                this.getNumberSatellites(),this.getNumberPlanes(),this.getRelativeSpacing(),constellationFromTradespaceSearch.getOrbit(),null,satellites);
-        GroundNetwork groundNetwork=this.properties.getTradespaceSearch().getDesignSpace().getGroundNetworks().get(0);
-        GroundNetwork groundNetworkWithGroundStations = new GroundNetwork(groundNetwork.getName(),
-                                                                        groundNetwork.getAcronym(),
-                                                                        groundNetwork.getAgency(),
-                                                                        groundNetwork.getNumberStations(),
-                                                                        this.properties.getTradespaceSearch().getDesignSpace().getGroundStations());
+        Constellation constellation=new Constellation("DELTA_HOMOGENEOUS",
+                this.getNumberSatellites(),this.getNumberPlanes(),this.getRelativeSpacing(),
+                null,null,satellites);
+
         List<Constellation> constellations = new ArrayList<>();
         constellations.add(constellation);
-        List<GroundNetwork> groundNetworksWithGroundStations = new ArrayList<>();
-        groundNetworksWithGroundStations.add(groundNetworkWithGroundStations);
-        Architecture arch =new Architecture(constellations, groundNetworksWithGroundStations);
+        List<GroundNetwork> groundNetworks = new ArrayList<>();
+        groundNetworks.add(this.groundNetwork);
+        Architecture arch =new Architecture(constellations, groundNetworks);
         File mainPath = new File(System.getProperty("user.dir"), "problems");
-        File file = new File (mainPath,"Architecture"+Integer.toString(counter)+".json");
+        File file = new File (mainPath,"arch-"+Integer.toString(counter)+".json");
         JSONIO.writeJSON(file,arch);
         try {
             JSONIO.replaceTypeFieldUnderscore(file);

@@ -26,8 +26,6 @@ public class SpectralImager {
     private final Double dataRate;
     private final String solarConditions;
     private final Object orientation;
-    // private final double orientation;
-    // private final String orientation;
     private final Double minSignalNoiseRatio;
     private final Double detectiveQuantumEfficiency;
 

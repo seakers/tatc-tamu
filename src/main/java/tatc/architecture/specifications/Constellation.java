@@ -22,19 +22,11 @@ public class Constellation {
     private final String _type="Constellation";
     private final String constellationType;
     private final Object numberSatellites;
-    // private final int numberSatellites;
-    // private final QuantitativeRange numberSatellites;
     private final Object numberPlanes;
-    // private final int numberPlanes;
-    // private final QuantitativeRange numberPlanes;
     private final Object relativeSpacing;
-    // private final int relativeSpacing;
-    // private final QuantitativeRange relativeSpacing;
     @JsonAdapter(AlwaysListTypeAdapterFactory.class)
     private final List<Orbit> orbit;
     private final Object satelliteInterval;
-    // private final double satelliteInterval;
-    // private final String satelliteInterval;
     private final List<Satellite> satellites;
 
     public Constellation(String constellationType, Object numberSatellites, Object numberPlanes, Object relativeSpacing, List<Orbit> orbit, Object satelliteInterval, List<Satellite> satellites) {
@@ -116,8 +108,10 @@ public class Constellation {
                 relSpacing.add(d.intValue());
             }
             return relSpacing;
-        }else if (relativeSpacing instanceof LinkedTreeMap && ((LinkedTreeMap) relativeSpacing).get("@type").equals("QuantitativeRange")){
-            return QuantitativeRange.createQuantitativeRangeFromLinkedTreeMap((LinkedTreeMap)relativeSpacing);
+        }else if (relativeSpacing instanceof LinkedTreeMap && ((LinkedTreeMap) relativeSpacing).get("@type").equals("QuantitativeRange")) {
+            return QuantitativeRange.createQuantitativeRangeFromLinkedTreeMap((LinkedTreeMap) relativeSpacing);
+        }else if (relativeSpacing == null){
+            return null;
         }else {
             throw new IllegalArgumentException("RelativeSpacing has to be either an Integer or a QuantitativeRange in TradespaceSearch.json");
         }
@@ -130,6 +124,8 @@ public class Constellation {
             return List.class;
         }else if (relativeSpacing instanceof LinkedTreeMap && ((LinkedTreeMap) relativeSpacing).get("@type").equals("QuantitativeRange")){
             return QuantitativeRange.class;
+        }else if (relativeSpacing == null){
+            return null;
         }else {
             throw new IllegalArgumentException("RelativeSpacing has to be either an Integer or a QuantitativeRange in TradespaceSearch.json");
         }

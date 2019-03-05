@@ -2,14 +2,18 @@ package tatc.tradespaceiterator;
 
 import org.orekit.errors.OrekitException;
 import org.orekit.time.AbsoluteDate;
-import seakers.orekit.constellations.EnumerateConstellations;
 import seakers.orekit.constellations.TrainParameters;
 import seakers.orekit.constellations.WalkerParameters;
 import tatc.architecture.TATCTrain;
 import tatc.architecture.TATCWalker;
+import tatc.architecture.specifications.GroundNetwork;
+import tatc.architecture.specifications.Satellite;
+import tatc.architecture.variable.Decision;
+import tatc.util.Enumeration;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class TradespaceSearchStrategyFF implements TradespaceSearchStrategy {
     ProblemProperties properties;
@@ -34,23 +38,40 @@ public class TradespaceSearchStrategyFF implements TradespaceSearchStrategy {
     public void startWalker(){
         //TODO: make this readable
         //convert arraylists to array in order to pass into fullFactWalker
-        Double[] smaArray = ((ProblemPropertiesWalker)properties).getSmas().toArray(new Double[((ProblemPropertiesWalker)properties).getSmas().size()]);
-        Double[] incArray = ((ProblemPropertiesWalker)properties).getInclinations().toArray(new Double[((ProblemPropertiesWalker)properties).getInclinations().size()]);
-        Integer[] numSatsArray = ((ProblemPropertiesWalker)properties).getNumberOfSats().toArray(new Integer[((ProblemPropertiesWalker)properties).getNumberOfSats().size()]);
+        HashMap<String,Decision<?>> decisions = ((ProblemPropertiesWalker)properties).getDecisions();
 
         //TODO: full factorial enumeration: use SystemArchitectureProblems
-        ArrayList<WalkerParameters> constellationParams = EnumerateConstellations.fullFactWalker(smaArray, incArray, numSatsArray);
+        ArrayList<WalkerParameters> constellationParamsTotal = new ArrayList<>();
+        for (int constellationCount=1 ; constellationCount<=properties.getTradespaceSearch().getDesignSpace().getConstellations().size(); constellationCount++){
+            ArrayList<WalkerParameters> constellationParams = Enumeration.fullFactWalker((Decision<Double>) decisions.get(String.format("altitude%d",constellationCount)),
+                    (Decision<Object>)decisions.get(String.format("inclination%d",constellationCount)),
+                    (Decision<Integer>)decisions.get(String.format("numberSatellites%d",constellationCount)),
+                    (Decision<Integer>)decisions.get(String.format("numberPlanes%d",constellationCount)),
+                    (Decision<Integer>)decisions.get(String.format("relativeSpacing%d",constellationCount)));
+            constellationParamsTotal.addAll(constellationParams);
+        }
+
 
         //TODO: change params to constellation
-        for (WalkerParameters constellation : constellationParams) {
-            // 1. From constellation, create a TATCWalker object
-            TATCWalker architecture = new TATCWalker(constellation.getA(),constellation.getI(),constellation.getT(),constellation.getP(),constellation.getF(),this.properties);
-            // 2. create the Architecture JSON file
-            File architectureJsonFile = architecture.toJSON(this.getCounter());
-            // 3. Evaluate architecture
-            TradespaceSearchExecutive.evaluateArchitecture(architectureJsonFile);
-            // increment the counter at each architecture evaluation
-            this.incrementCounter();
+        Decision<Satellite> decisionSatellite = (Decision<Satellite>)decisions.get("satellite");
+        for (WalkerParameters constellation : constellationParamsTotal) {
+            for (int groundNetworkCount=1; groundNetworkCount<=properties.getTradespaceSearch().getDesignSpace().getGroundNetworks().size(); groundNetworkCount++){
+                Decision<GroundNetwork> decisionGroundNetwork = (Decision<GroundNetwork>)decisions.get(String.format("groundNetwork%d",groundNetworkCount));
+                for (GroundNetwork gn : decisionGroundNetwork.getAllowedValues()){
+                    for (Satellite sat : decisionSatellite.getAllowedValues()){
+                        // 1. From constellation, create a TATCWalker object
+                        TATCWalker architecture = new TATCWalker(constellation.getA(),constellation.getI(),constellation.getT(),
+                                constellation.getP(),constellation.getF(),sat, gn,this.properties);
+                        // 2. create the Architecture JSON file
+                        File architectureJsonFile = architecture.toJSON(this.getCounter());
+                        // 3. Evaluate architecture
+                        TradespaceSearchExecutive.evaluateArchitecture(architectureJsonFile);
+                        // increment the counter at each architecture evaluation
+                        this.incrementCounter();
+                    }
+                }
+            }
+
         }
 
     }
@@ -62,7 +83,7 @@ public class TradespaceSearchStrategyFF implements TradespaceSearchStrategy {
         //convert arraylists to array in order to pass into fullFactWalker
         Double[] smaArray = ((ProblemPropertiesTrain)properties).getSmas().toArray(new Double[((ProblemPropertiesTrain)properties).getSmas().size()]);
 
-        ArrayList<TrainParameters> constellationParams=EnumerateConstellations.fullFactTrain(smaArray,((ProblemPropertiesTrain)properties).getLTANs());
+        ArrayList<TrainParameters> constellationParams=Enumeration.fullFactTrain(smaArray,((ProblemPropertiesTrain)properties).getLTANs());
 
         for (TrainParameters constellation : constellationParams) {
 
