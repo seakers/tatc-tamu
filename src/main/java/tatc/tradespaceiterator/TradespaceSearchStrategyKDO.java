@@ -16,6 +16,7 @@ import seakers.aos.operatorselectors.replacement.*;
 import tatc.tradespaceiterator.search.AbstractPopulationLabeler;
 import tatc.tradespaceiterator.search.KDOSearch;
 import tatc.tradespaceiterator.search.PopulationLabeler;
+import tatc.tradespaceiterator.search.TATCOperatorCreator;
 
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -68,7 +69,7 @@ public class TradespaceSearchStrategyKDO extends TradespaceSearchStrategyGA {
         EpochTrigger epochTrigger = new EpochTrigger(epochLength, triggerOffset);
         InitialTrigger initTrigger = new InitialTrigger(triggerOffset);
         CompoundTrigger compTrigger = new CompoundTrigger(Arrays.asList(new ReplacementTrigger[]{epochTrigger, initTrigger}));
-        knowledge.operator.EOSSOperatorCreator eossOpCreator = new knowledge.operator.EOSSOperatorCreator();
+        TATCOperatorCreator eossOpCreator = new TATCOperatorCreator();
         ArrayList<Variation> permanentOps = new ArrayList();
         permanentOps.add(SinglePointCross);
         RemoveNLowest operatorRemover = new RemoveNLowest(permanentOps, typProperties.getInt("nOpsToRemove", 2));

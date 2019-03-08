@@ -13,7 +13,6 @@ import seakers.aos.operator.AOSVariation;
 import seakers.aos.operator.AOSVariationSI;
 import seakers.aos.operatorselectors.AdaptivePursuit;
 import seakers.aos.operatorselectors.OperatorSelector;
-import seakers.architecture.operators.IntegerUM;
 import tatc.ResultIO;
 import tatc.tradespaceiterator.search.VariableMutation;
 
@@ -41,7 +40,7 @@ public class TradespaceSearchStrategyAOS extends TradespaceSearchStrategyGA {
             Variation crossover2 = new TwoPointCrossover(1);
             Variation crossover3 = new UniformCrossover(1);
             Variation mutation1 = new VariableMutation(1);
-            Variation mutation2 = new IntegerUM(0.5);
+            Variation mutation2 = new VariableMutation(0.5);
             Variation compoundOp1 = new CompoundVariation(crossover1, mutation1);
             Variation compoundOp2 = new CompoundVariation(crossover2, mutation1);
             Variation compoundOp3 = new CompoundVariation(crossover3, mutation1);

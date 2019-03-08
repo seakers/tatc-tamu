@@ -2,7 +2,7 @@ package tatc.tradespaceiterator;
 
 import org.moeaframework.core.Solution;
 import org.moeaframework.problem.AbstractProblem;
-import seakers.conmop.util.Factor;
+import tatc.util.Factor;
 import tatc.architecture.StandardFormArchitecture;
 import tatc.architecture.specifications.Constellation;
 import tatc.architecture.specifications.Orbit;
