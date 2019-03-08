@@ -1,19 +1,16 @@
 package tatc.architecture;
 
-import org.hipparchus.util.FastMath;
 import org.orekit.errors.OrekitException;
+import org.orekit.time.AbsoluteDate;
 import org.orekit.time.TimeScalesFactory;
 import org.orekit.utils.Constants;
-import seakers.conmop.util.Bounds;
 import seakers.orekit.util.Orbits;
-import org.orekit.time.AbsoluteDate;
 import tatc.architecture.specifications.*;
 import tatc.tradespaceiterator.ProblemProperties;
 import tatc.util.JSONIO;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.ArrayList;
 import java.util.List;
 

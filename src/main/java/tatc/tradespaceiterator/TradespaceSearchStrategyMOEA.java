@@ -1,17 +1,17 @@
 package tatc.tradespaceiterator;
 
 import org.moeaframework.algorithm.EpsilonMOEA;
-import org.moeaframework.core.*;
-import org.moeaframework.core.operator.CompoundVariation;
-import org.moeaframework.core.operator.OnePointCrossover;
+import org.moeaframework.core.Initialization;
+import org.moeaframework.core.Population;
+import org.moeaframework.core.Solution;
+import org.moeaframework.core.Variation;
+import org.moeaframework.core.operator.*;
 import tatc.ResultIO;
 import tatc.tradespaceiterator.search.VariableMutation;
+
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashSet;
-import org.moeaframework.core.operator.RandomInitialization;
-import org.moeaframework.core.operator.TwoPointCrossover;
-import org.moeaframework.core.operator.UniformCrossover;
 
 public class TradespaceSearchStrategyMOEA extends TradespaceSearchStrategyGA {
 

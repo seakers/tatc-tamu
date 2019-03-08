@@ -1,15 +1,12 @@
 package tatc.architecture.specifications;
 
 import com.google.gson.annotations.SerializedName;
-import org.hipparchus.util.CombinatoricsUtils;
 import tatc.architecture.variable.Decision;
 import tatc.util.Combinatorics;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 /**
  * A set of constraints and parameters to bound and define a tradespace search.

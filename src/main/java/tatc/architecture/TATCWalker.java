@@ -5,15 +5,15 @@
  */
 package tatc.architecture;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.hipparchus.util.FastMath;
 import tatc.architecture.specifications.*;
 import tatc.tradespaceiterator.ProblemProperties;
 import tatc.util.JSONIO;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *

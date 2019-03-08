@@ -1,10 +1,10 @@
 package tatc.tradespaceiterator;
 
-import java.io.File;
-import java.util.Properties;
-
 import tatc.architecture.specifications.TradespaceSearch;
 import tatc.util.JSONIO;
+
+import java.io.File;
+import java.util.Properties;
 
 /**
  * TradespaceSearchExecutive class which reads TradespaceSearchRequest.json, creates a problem (e.g. Walker or Train),

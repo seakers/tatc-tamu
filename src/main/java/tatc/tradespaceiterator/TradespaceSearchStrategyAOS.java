@@ -1,7 +1,10 @@
 package tatc.tradespaceiterator;
 
 import org.moeaframework.algorithm.EpsilonMOEA;
-import org.moeaframework.core.*;
+import org.moeaframework.core.Initialization;
+import org.moeaframework.core.Population;
+import org.moeaframework.core.Solution;
+import org.moeaframework.core.Variation;
 import org.moeaframework.core.operator.*;
 import seakers.aos.aos.AOSMOEA;
 import seakers.aos.creditassignment.setimprovement.SetImprovementDominance;
@@ -10,6 +13,7 @@ import seakers.aos.operator.AOSVariation;
 import seakers.aos.operator.AOSVariationSI;
 import seakers.aos.operatorselectors.AdaptivePursuit;
 import seakers.aos.operatorselectors.OperatorSelector;
+import seakers.architecture.operators.IntegerUM;
 import tatc.ResultIO;
 import tatc.tradespaceiterator.search.VariableMutation;
 
@@ -17,7 +21,6 @@ import java.io.File;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashSet;
-import seakers.architecture.operators.IntegerUM;
 
 public class TradespaceSearchStrategyAOS extends TradespaceSearchStrategyGA {
 

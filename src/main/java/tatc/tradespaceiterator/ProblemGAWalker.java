@@ -4,14 +4,12 @@ import org.moeaframework.core.Solution;
 import org.moeaframework.problem.AbstractProblem;
 import seakers.conmop.util.Factor;
 import tatc.architecture.StandardFormArchitecture;
-import tatc.architecture.TATCWalker;
 import tatc.architecture.specifications.Constellation;
 import tatc.architecture.specifications.Orbit;
 import tatc.architecture.specifications.QuantitativeRange;
 import tatc.architecture.variable.IntegerVariable;
 import tatc.architecture.variable.RealVariable;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -144,14 +142,14 @@ public class ProblemGAWalker extends AbstractProblem {
         if (f == -1) {
             throw new IllegalStateException("Error in number of phases q = -1");
         }
-        TATCWalker architecture = new TATCWalker(sma,incl,(int)nsat,p,f,this.properties);
-
-        // 2. create the Architecture JSON file
-        File architectureJsonFile = architecture.toJSON(this.getCounter());
-        // 3. Evaluate architecture
-        TradespaceSearchExecutive.evaluateArchitecture(architectureJsonFile);
-        // increment the counter at each architecture evaluation
-        this.incrementCounter();
+//        TATCWalker architecture = new TATCWalker(sma,incl,(int)nsat,p,f,this.properties);
+//
+//        // 2. create the Architecture JSON file
+//        File architectureJsonFile = architecture.toJSON(this.getCounter());
+//        // 3. Evaluate architecture
+//        TradespaceSearchExecutive.evaluateArchitecture(architectureJsonFile);
+//        // increment the counter at each architecture evaluation
+//        this.incrementCounter();
 
 
     }
@@ -171,11 +169,11 @@ public class ProblemGAWalker extends AbstractProblem {
         
         Solution sol = new StandardFormArchitecture(getNumberOfVariables(), getNumberOfObjectives());
         
-        sol.setVariable(0, new IntegerVariable(0, 0, ((ProblemPropertiesWalker)properties).getSmas().size() - 1));
-        sol.setVariable(1, new IntegerVariable(0, 0, ((ProblemPropertiesWalker)properties).getInclinations().size() - 1));
-        sol.setVariable(2, new IntegerVariable(0, 0, ((ProblemPropertiesWalker)properties).getNumberOfSats().size() - 1));
-        sol.setVariable(3, new RealVariable(0, 1)); //planes
-        sol.setVariable(4, new RealVariable(0, 1)); //phasing
+//        sol.setVariable(0, new IntegerVariable(0, 0, ((ProblemPropertiesWalker)properties).getSmas().size() - 1));
+//        sol.setVariable(1, new IntegerVariable(0, 0, ((ProblemPropertiesWalker)properties).getInclinations().size() - 1));
+//        sol.setVariable(2, new IntegerVariable(0, 0, ((ProblemPropertiesWalker)properties).getNumberOfSats().size() - 1));
+//        sol.setVariable(3, new RealVariable(0, 1)); //planes
+//        sol.setVariable(4, new RealVariable(0, 1)); //phasing
         
         return sol;
     }

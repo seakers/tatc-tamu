@@ -5,25 +5,6 @@
  */
 package tatc.tradespaceiterator.search;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import seakers.aos.aos.AOS;
-import seakers.aos.operatorselectors.replacement.OperatorReplacementStrategy;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.BitSet;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.moeaframework.algorithm.AbstractEvolutionaryAlgorithm;
 import org.moeaframework.core.Algorithm;
 import org.moeaframework.core.Population;
@@ -32,7 +13,17 @@ import org.moeaframework.core.Variation;
 import org.moeaframework.core.operator.CompoundVariation;
 import org.moeaframework.core.operator.OnePointCrossover;
 import org.moeaframework.util.TypedProperties;
+import seakers.aos.aos.AOS;
+import seakers.aos.operatorselectors.replacement.OperatorReplacementStrategy;
 import tatc.ResultIO;
+
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.*;
+import java.util.concurrent.Callable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * This method applies data mining and innovization to increase the efficiency

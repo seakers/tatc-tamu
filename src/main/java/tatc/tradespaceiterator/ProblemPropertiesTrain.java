@@ -7,7 +7,6 @@ import tatc.architecture.specifications.QuantitativeRange;
 import tatc.architecture.specifications.TradespaceSearch;
 
 import java.util.ArrayList;
-import java.util.Properties;
 
 public class ProblemPropertiesTrain implements ProblemProperties{
     private final ArrayList<Double> smas;

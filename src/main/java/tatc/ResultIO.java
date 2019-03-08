@@ -8,16 +8,7 @@ package tatc;
  *
  * @author Prachi
  */
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import org.moeaframework.analysis.collector.Accumulator;
 import org.moeaframework.analysis.collector.InstrumentedAlgorithm;
 import org.moeaframework.core.Population;
@@ -25,6 +16,13 @@ import org.moeaframework.core.PopulationIO;
 import org.moeaframework.core.Solution;
 import tatc.tradespaceiterator.search.DrivingFeature;
 import tatc.tradespaceiterator.search.PopulationLabeler;
+
+import java.io.*;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ResultIO implements Serializable{
 

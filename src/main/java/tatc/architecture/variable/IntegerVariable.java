@@ -5,9 +5,10 @@
  */
 package tatc.architecture.variable;
 
-import java.text.MessageFormat;
 import org.moeaframework.core.PRNG;
 import org.moeaframework.core.Variable;
+
+import java.text.MessageFormat;
 
 /**
  * An integer variable is a discrete-valued variable with an upper and lower

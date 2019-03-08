@@ -5,9 +5,10 @@
  */
 package tatc.tradespaceiterator.search;
 
+import org.hipparchus.util.Combinations;
+
 import java.util.*;
 import java.util.logging.Logger;
-import org.hipparchus.util.Combinations;
 
 /**
  * Classification association rule mining. This class implements the rule

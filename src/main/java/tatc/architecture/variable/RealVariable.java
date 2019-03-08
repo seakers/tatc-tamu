@@ -4,11 +4,12 @@
 //
 package tatc.architecture.variable;
 
-import java.text.MessageFormat;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.moeaframework.core.PRNG;
 import org.moeaframework.core.Variable;
+
+import java.text.MessageFormat;
 
 public class RealVariable implements Variable {
     private static final long serialVersionUID = 3141851312155686224L;

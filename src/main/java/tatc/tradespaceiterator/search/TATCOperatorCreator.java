@@ -5,11 +5,11 @@
  */
 package tatc.tradespaceiterator.search;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import org.moeaframework.core.Variation;
+import org.moeaframework.core.operator.CompoundVariation;
+import seakers.aos.operatorselectors.replacement.OperatorCreator;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -17,9 +17,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.moeaframework.core.Variation;
-import org.moeaframework.core.operator.CompoundVariation;
-import seakers.aos.operatorselectors.replacement.OperatorCreator;
 
 /**
  *

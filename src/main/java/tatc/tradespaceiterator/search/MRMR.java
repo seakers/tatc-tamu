@@ -10,13 +10,14 @@ package tatc.tradespaceiterator.search;
  * @author Nozomi
  */
 
+import org.hipparchus.util.FastMath;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.List;
 import java.util.logging.Logger;
-import org.hipparchus.util.FastMath;
 
 public class MRMR {
 

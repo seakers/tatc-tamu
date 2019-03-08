@@ -6,7 +6,6 @@
 package tatc.tradespaceiterator.search;
 
 import java.util.BitSet;
-import mining.Feature;
 
 /**
  * An abstract class for a feature that explains the data

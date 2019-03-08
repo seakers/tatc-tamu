@@ -1,17 +1,9 @@
 package tatc.tradespaceiterator;
 
-import org.hipparchus.util.FastMath;
-import org.orekit.utils.Constants;
-import tatc.architecture.specifications.Constellation;
-import tatc.architecture.specifications.Orbit;
-import tatc.architecture.specifications.QuantitativeRange;
 import tatc.architecture.specifications.TradespaceSearch;
 import tatc.architecture.variable.Decision;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class ProblemPropertiesWalker implements ProblemProperties{
     private final TradespaceSearch tradespaceSearch;
