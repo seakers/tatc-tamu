@@ -29,7 +29,7 @@ Executable script is provided in the `src/main/java/tatc` directory.
 Executes a full-factorial tradespace search or intelligent search including enumeration (generating architectures):
 
 ```shell
-java -jar ./target/tatc-ml-tse.jar
+java -jar ./target/tatc-ml-tse-1.0.jar
 ```
 
 Outputs:
@@ -37,10 +37,9 @@ Outputs:
 |-- problems/
     |-- TradespaceSearch.json
     |-- arch-0/
-        |-- arch.json
+        |-- arch-0.json
     |-- arch-1/
-        |-- arch.json
-        |-- ...(outputs)...
+        |-- arch-1.json
     |-- arch-2/
-        |-- arch.json
+        |-- arch-2.json
 ```
