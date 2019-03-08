@@ -4,8 +4,8 @@ import org.orekit.errors.OrekitException;
 import org.orekit.time.AbsoluteDate;
 import seakers.orekit.constellations.TrainParameters;
 import seakers.orekit.constellations.WalkerParameters;
-import tatc.architecture.TATCTrain;
-import tatc.architecture.TATCWalker;
+import tatc.architecture.Train;
+import tatc.architecture.Walker;
 import tatc.architecture.specifications.GroundNetwork;
 import tatc.architecture.specifications.Satellite;
 import tatc.architecture.variable.Decision;
@@ -59,8 +59,8 @@ public class TradespaceSearchStrategyFF implements TradespaceSearchStrategy {
                 Decision<GroundNetwork> decisionGroundNetwork = (Decision<GroundNetwork>)decisions.get(String.format("groundNetwork%d",groundNetworkCount));
                 for (GroundNetwork gn : decisionGroundNetwork.getAllowedValues()){
                     for (Satellite sat : decisionSatellite.getAllowedValues()){
-                        // 1. From constellation, create a TATCWalker object
-                        TATCWalker architecture = new TATCWalker(constellation.getA(),constellation.getI(),constellation.getT(),
+                        // 1. From constellation, create a Walker object
+                        Walker architecture = new Walker(constellation.getA(),constellation.getI(),constellation.getT(),
                                 constellation.getP(),constellation.getF(),sat, gn,this.properties);
                         // 2. create the Architecture JSON file
                         File architectureJsonFile = architecture.toJSON(this.getCounter());
@@ -89,8 +89,8 @@ public class TradespaceSearchStrategyFF implements TradespaceSearchStrategy {
 
             try {
                 //TODO: figure out how to create the orekit ABsoluteDate from starDate epoch
-                // 1. From constellation, create a TATCTrain object
-                TATCTrain architecture = new TATCTrain(constellation.getA(),constellation.getLTANs(),new AbsoluteDate(),this.properties);
+                // 1. From constellation, create a Train object
+                Train architecture = new Train(constellation.getA(),constellation.getLTANs(),new AbsoluteDate(),this.properties);
                 // 2. create the ArchitectureMethods JSON
                 File architectureJsonFile = architecture.toJSON(this.getCounter());
                 // 3. Evaluate architecture

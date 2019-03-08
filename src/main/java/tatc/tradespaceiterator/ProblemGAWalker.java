@@ -39,7 +39,7 @@ public class ProblemGAWalker extends AbstractProblem {
         }
         
         //TODO:
-        // 1. From the gene, create a TATCWalker object
+        // 1. From the gene, create a Walker object
         Constellation constellation=this.properties.getTradespaceSearch().getDesignSpace().getConstellations().get(0);
         Orbit orbit = constellation.getOrbit().get(0);
 
@@ -142,7 +142,7 @@ public class ProblemGAWalker extends AbstractProblem {
         if (f == -1) {
             throw new IllegalStateException("Error in number of phases q = -1");
         }
-//        TATCWalker architecture = new TATCWalker(sma,incl,(int)nsat,p,f,this.properties);
+//        Walker architecture = new Walker(sma,incl,(int)nsat,p,f,this.properties);
 //
 //        // 2. create the Architecture JSON file
 //        File architectureJsonFile = architecture.toJSON(this.getCounter());

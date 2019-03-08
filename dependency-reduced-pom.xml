@@ -20,7 +20,7 @@
         <configuration>
           <transformers>
             <transformer>
-              <mainClass>tatc.TATC</mainClass>
+              <mainClass>tatc.TSE</mainClass>
             </transformer>
           </transformers>
         </configuration>

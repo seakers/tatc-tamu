@@ -66,7 +66,7 @@ public class KDOSearch implements Callable<Algorithm> {
     /**
      * operator creator for EOSS assignment problems
      */
-    private final TATCOperatorCreator operatorCreator;
+    private final OperatorCreator operatorCreator;
 
     /**
      * the strategy for how to and when to remove and add operators
@@ -91,10 +91,10 @@ public class KDOSearch implements Callable<Algorithm> {
         this.dataLabeler = dataLabeler;
         this.lableIO = new ResultIO();
         this.ops = ops;
-        if (!(ops.getOperatorCreator() instanceof TATCOperatorCreator)) {
-            throw new IllegalArgumentException(String.format("Expected TATCOperatorCreator as operator creation strategy. Found %s", ops.getOperatorCreator().getClass().getSimpleName()));
+        if (!(ops.getOperatorCreator() instanceof OperatorCreator)) {
+            throw new IllegalArgumentException(String.format("Expected OperatorCreator as operator creation strategy. Found %s", ops.getOperatorCreator().getClass().getSimpleName()));
         } else {
-            this.operatorCreator = (TATCOperatorCreator) ops.getOperatorCreator();
+            this.operatorCreator = (OperatorCreator) ops.getOperatorCreator();
         }
     }
 

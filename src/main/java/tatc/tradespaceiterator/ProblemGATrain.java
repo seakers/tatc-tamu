@@ -6,7 +6,7 @@ import org.moeaframework.problem.AbstractProblem;
 import org.orekit.errors.OrekitException;
 import org.orekit.time.AbsoluteDate;
 import tatc.architecture.StandardFormArchitecture;
-import tatc.architecture.TATCTrain;
+import tatc.architecture.Train;
 import tatc.architecture.specifications.Constellation;
 import tatc.architecture.specifications.Orbit;
 import tatc.architecture.specifications.QuantitativeRange;
@@ -43,7 +43,7 @@ public class ProblemGATrain extends AbstractProblem {
                             + " Found %s", solution.getClass()));
         }
 
-        // 1. From the gene, create a TATCTrain object
+        // 1. From the gene, create a Train object
         Constellation constellation=this.properties.getTradespaceSearch().getDesignSpace().getConstellations().get(0);
         Orbit orbit = constellation.getOrbit().get(0);
 
@@ -67,8 +67,8 @@ public class ProblemGATrain extends AbstractProblem {
 
         try {
             //TODO: figure out how to create the orekit AbsoluteDate from starDate epoch
-            // 1. From constellation, create a TATCTrain object
-            TATCTrain architecture = new TATCTrain(sma,LTANsFiltered,new AbsoluteDate(),this.properties);
+            // 1. From constellation, create a Train object
+            Train architecture = new Train(sma,LTANsFiltered,new AbsoluteDate(),this.properties);
             // 2. create the ArchitectureMethods JSON
             File architectureJsonFile = architecture.toJSON(this.getCounter());
             // 3. Evaluate architecture
