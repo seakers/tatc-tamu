@@ -133,7 +133,9 @@ public class TATCTrain implements ArchitectureMethods {
         groundNetworksWithGroundStations.add(groundNetworkWithGroundStations);
         Architecture arch =new Architecture(constellations, groundNetworksWithGroundStations);
         File mainPath = new File(System.getProperty("user.dir"), "problems");
-        File file = new File (mainPath,"arch-"+Integer.toString(counter)+".json");
+        File archPatch = new File(mainPath,"arch-"+Integer.toString(counter));
+        archPatch.mkdirs();
+        File file = new File (archPatch,"arch-"+Integer.toString(counter)+".json");
         JSONIO.writeJSON(file,arch);
         try {
             JSONIO.replaceTypeFieldUnderscore(file);

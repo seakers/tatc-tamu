@@ -54,6 +54,12 @@
                             <mainClass>tatc.TATC</mainClass>
                         </transformer>
                     </transformers>
+                    <artifactSet>
+                        <excludes>
+                            <exclude>bouncycastle:bcmail-jdk14</exclude>
+                            <exclude>bouncycastle:bcprov-jdk14</exclude>
+                        </excludes>
+                    </artifactSet>
                 </configuration>
                 <executions>
                     <execution>

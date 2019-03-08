@@ -144,7 +144,9 @@ public class TATCWalker implements ArchitectureMethods{
         groundNetworks.add(this.groundNetwork);
         Architecture arch =new Architecture(constellations, groundNetworks);
         File mainPath = new File(System.getProperty("user.dir"), "problems");
-        File file = new File (mainPath,"arch-"+Integer.toString(counter)+".json");
+        File archPatch = new File(mainPath,"arch-"+Integer.toString(counter));
+        archPatch.mkdirs();
+        File file = new File (archPatch,"arch-"+Integer.toString(counter)+".json");
         JSONIO.writeJSON(file,arch);
         try {
             JSONIO.replaceTypeFieldUnderscore(file);
